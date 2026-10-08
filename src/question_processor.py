@@ -2,14 +2,12 @@
 question_processor.py
 
 Core processing logic for medical assessment stem isolation and decomposition.
-Implements the 'AI Eyes, Python Scissors' method:
-- Live AI boundary detector is the default and only production boundary detector.
-- Python performs 100% of text slicing directly on the raw input string.
-- Slices boundary offsets [start, end] with 0% text modification or omission.
-- Strictly adheres to the <= 500 char stem constraint.
-- Forward model and credentials consistently.
-- Calculates verification dynamically from actual source spans and exported fields.
-- Offline parser is isolated in src/experimental/autonomous_parser.py and not invoked here.
+Enforces the 'AI Eyes, Python Scissors' architecture:
+- Boundary extraction is performed exclusively by genuine LLMs (Antigravity CLI or Direct Gemini API).
+- Never substitutes the offline parser, regex boundary guesses, or benchmark answers during production runs.
+- Python performs 100% of deterministic validation, field ordering checks, and verbatim text slicing.
+- If model calls fail, authentication is missing, or schema validation fails, the item is marked as
+  disposition='needs_review' with exact raw input preserved and zero data loss.
 """
 
 import json
@@ -17,65 +15,94 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 
 from ai_boundary_detector import AIBoundaryDetector
+from antigravity_cli_provider import AntigravityCLIProvider
+from contract_validator import ContractValidator
+from contract_slicer import contract_to_platform_items
+from prompt_loader import load_master_prompt_text, get_default_config
 
 
 def process_question_item(
     raw_text: str,
     question_id: str = "custom",
+    provider: str = "antigravity-cli",
     ai_detector: Optional[AIBoundaryDetector] = None,
+    cli_provider: Optional[AntigravityCLIProvider] = None,
     domain: str = "Clinical Nursing",
     config: Optional[Dict[str, Any]] = None,
-    engine: str = "live"
+    api_key: Optional[str] = None,
+    model_name: Optional[str] = None
 ) -> Tuple[Dict[str, Any], List[Dict[str, Any]], Dict[str, Any]]:
     """
-    Unified entry point to process a question item.
-    Defaults to live AI detector. Also supports offline experimental parser when requested.
-    Returns (contract, platform_items, execution_metadata).
+    Unified production entry point to process a question item using a real LLM.
+    Defaults to Antigravity CLI ('antigravity-cli').
+    Also supports direct Gemini API ('gemini-api') if selected.
+    Never falls back to regex or benchmark answers.
+    Returns: (contract, platform_items, execution_metadata).
     """
-    if engine == "offline":
-        import hashlib
-        from experimental.autonomous_parser import AutonomousSemanticParser
-        from contract_validator import ContractValidator
-        from contract_slicer import contract_to_platform_items
+    cfg = config or get_default_config()
+    max_stem_chars = cfg.get("max_stem_chars", 500)
 
-        contract = AutonomousSemanticParser.parse_to_contract(raw_text, source_id=question_id, config=config)
-        is_valid, validation_errors = ContractValidator.validate(raw_text, contract, expected_source_id=question_id, config=config)
-        items = contract_to_platform_items(
+    if provider == "antigravity-cli":
+        cli = cli_provider or AntigravityCLIProvider(model_name=model_name)
+        sys_prompt = load_master_prompt_text()
+        contract, metadata = cli.detect_boundaries(
+            raw_text=raw_text,
+            question_id=question_id,
+            system_prompt=sys_prompt,
+            config=cfg
+        )
+        is_valid, validation_errors = ContractValidator.validate(
+            raw_text=raw_text,
+            contract=contract,
+            expected_source_id=question_id,
+            config=cfg
+        )
+        metadata["validation"] = {
+            "valid": is_valid,
+            "errors": validation_errors
+        }
+        if not is_valid:
+            metadata["status"] = "failed_validation"
+            contract["status"] = "needs_review"
+            for it in contract.get("items", []):
+                it["disposition"] = "needs_review"
+
+        platform_items = contract_to_platform_items(
             contract=contract,
             raw_text=raw_text,
             domain=domain,
-            max_stem_chars=config.get("max_stem_chars", 500) if config else 500
+            max_stem_chars=max_stem_chars
         )
-        meta = {
-            "engine": "offline-autonomous-semantic-parser",
-            "model": "offline-rule-based",
-            "prompt_hash": "",
-            "source_hash": hashlib.sha256(raw_text.encode("utf-8")).hexdigest(),
-            "status": "success" if is_valid else "invalid",
-            "retries_used": 0
-        }
-        return contract, items, meta
+        return contract, platform_items, metadata
 
-    detector = ai_detector or AIBoundaryDetector()
-    return detector.detect_and_process(
-        raw_text=raw_text,
-        question_id=question_id,
-        domain=domain,
-        config=config
-    )
+    elif provider == "gemini-api":
+        detector = ai_detector or AIBoundaryDetector(api_key=api_key, model_name=model_name or "gemini-2.5-flash")
+        return detector.detect_and_process(
+            raw_text=raw_text,
+            question_id=question_id,
+            domain=domain,
+            config=cfg
+        )
+
+    else:
+        raise ValueError(
+            f"Unsupported provider: '{provider}'. "
+            "Must be 'antigravity-cli' (official Antigravity CLI) or 'gemini-api' (direct API)."
+        )
 
 
 def review_questions(
     inputs_dir: Optional[Path] = None,
     question_ids: Optional[List[str]] = None,
+    provider: str = "antigravity-cli",
     api_key: Optional[str] = None,
-    model_name: str = "gemini-2.5-flash",
-    config: Optional[Dict[str, Any]] = None,
-    engine: str = "live"
+    model_name: Optional[str] = None,
+    config: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """
-    Executes the stem isolation workflow across target questions.
-    Defaults to Live AI Boundary Detection. Discovers and processes every requested input file.
+    Executes the stem isolation workflow across target questions using genuine LLM extraction.
+    Defaults to Antigravity CLI provider.
+    Discovers and processes every requested input file.
     """
     files_to_process = []
     if inputs_dir and inputs_dir.exists():
@@ -91,13 +118,15 @@ def review_questions(
             for p in sorted(inputs_dir.glob("*.txt")):
                 files_to_process.append((p.stem, p))
     elif question_ids:
-        # No inputs_dir, but question_ids provided
         for qid in question_ids:
             files_to_process.append((qid, None))
 
-    detector = None
-    if engine != "offline":
-        detector = AIBoundaryDetector(api_key=api_key, model_name=model_name)
+    cli_provider = None
+    ai_detector = None
+    if provider == "antigravity-cli":
+        cli_provider = AntigravityCLIProvider(model_name=model_name)
+    elif provider == "gemini-api":
+        ai_detector = AIBoundaryDetector(api_key=api_key, model_name=model_name or "gemini-2.5-flash")
 
     results = []
     contracts = []
@@ -114,21 +143,17 @@ def review_questions(
             continue
 
         domain = "Clinical Nursing"
-        if engine == "offline":
-            contract, processed_items, meta = process_question_item(
-                raw_text=raw_text,
-                question_id=qid,
-                domain=domain,
-                config=config,
-                engine="offline"
-            )
-        else:
-            contract, processed_items, meta = detector.detect_and_process(
-                raw_text=raw_text,
-                question_id=qid,
-                domain=domain,
-                config=config
-            )
+        contract, processed_items, meta = process_question_item(
+            raw_text=raw_text,
+            question_id=qid,
+            provider=provider,
+            ai_detector=ai_detector,
+            cli_provider=cli_provider,
+            domain=domain,
+            config=config,
+            api_key=api_key,
+            model_name=model_name
+        )
 
         contracts.append(contract)
         results.extend(processed_items)
@@ -138,7 +163,10 @@ def review_questions(
     total_items = len(results)
     passed_items = sum(
         1 for r in results
-        if r.get("passed", False) and r.get("verification", {}).get("exact_match", False) and r.get("verification", {}).get("stem_under_500", False)
+        if r.get("passed", False)
+        and r.get("verification", {}).get("exact_match", False)
+        and r.get("verification", {}).get("stem_under_500", False)
+        and not r.get("verification", {}).get("review_gated", False)
     )
     preservation_rate = f"{(passed_items / total_items * 100):.1f}%" if total_items > 0 else "0.0%"
     all_under_500 = all(r["after"]["fits_500_char_limit"] for r in results) if results else False
@@ -146,15 +174,21 @@ def review_questions(
     split_screens = sum(1 for r in results if r["after"]["layout"] == "split_screen_with_reference")
     single_columns = sum(1 for r in results if r["after"]["layout"] == "single_column_stem_only")
 
-    method_desc = (
-        f"Live AI Boundary Detection with Verbatim Python Slicing. Engine: {detector.model_name}."
-        if detector
-        else "Autonomous Semantic Parser (Offline) with Verbatim Python Slicing."
-    )
+    if provider == "antigravity-cli":
+        method_desc = (
+            f"Genuine Antigravity CLI Extraction (agy v{cli_provider.cli_version}) "
+            f"with Verbatim Python Slicing. Model: {cli_provider.model_name or 'antigravity-default'}."
+        )
+    else:
+        method_desc = (
+            f"Direct Gemini API Extraction with Verbatim Python Slicing. "
+            f"Engine: {ai_detector.model_name}."
+        )
 
     payload = {
         "title": "Medical Assessment Stem Isolation - Reviewer Output",
         "method": method_desc,
+        "provider": provider,
         "summary": {
             "total_items": total_items,
             "passed_items": passed_items,
@@ -170,4 +204,3 @@ def review_questions(
     }
 
     return payload
-

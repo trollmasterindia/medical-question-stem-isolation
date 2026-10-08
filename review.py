@@ -4,20 +4,23 @@ review.py - CLI Reviewer for Medical Assessment Stem Isolation
 
 Executes the stem isolation workflow across medical questions using the
 'AI Eyes, Python Scissors' method:
-- Live AI boundary detection is the default and only production detector.
-- Python performs 100% of the string slicing directly on the raw text.
+- Boundary extraction is performed exclusively by genuine LLMs:
+    * Antigravity CLI ('antigravity-cli', default): uses developer Antigravity subscription and headless structured-output.
+    * Direct Gemini API ('gemini-api', optional): uses google.genai API client with secure env key.
+- Never substitutes the offline parser, regex boundary guesses, or benchmark answers during production runs.
+- Python performs 100% of deterministic validation, field ordering checks, and verbatim text slicing.
 - Character-order and content verification guarantees zero text alteration or omission.
 - Admin constraint enforced: Stem <= 500 characters.
-- Forwards configured model and credentials consistently for batch and single-file processing.
 - Exports exact model-returned contracts to data/master_contract_output.json.
 - Generates interactive Before vs After HTML comparison viewer.
 - Exports verified machine-readable JSON.
 
 Usage:
-    python review.py                                  # Review all questions in data/inputs using live AI
-    python review.py --file path/to/new_question.txt  # Review an arbitrary unseen question file
+    python review.py                                  # Review all questions using official Antigravity CLI
+    python review.py --file path/to/new_question.txt  # Review an individual unseen question file
     python review.py --ids Q001 Q025 Q063             # Review specific questions
     python review.py --open                           # Review and open HTML viewer in browser
+    python review.py --provider gemini-api            # Run via direct Gemini API (requires GEMINI_API_KEY)
 """
 
 import sys
@@ -32,13 +35,19 @@ ROOT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT_DIR / "src"))
 
 from question_processor import review_questions, process_question_item
-from ai_boundary_detector import AIBoundaryDetector
 from html_generator import generate_html_viewer
+from antigravity_cli_provider import AntigravityCLIProvider
 
 
 def main():
     parser = argparse.ArgumentParser(
         description="Review medical assessment questions, isolate stems <= 500 chars, and verify zero text loss."
+    )
+    parser.add_argument(
+        "--provider",
+        choices=["antigravity-cli", "gemini-api"],
+        default="antigravity-cli",
+        help="LLM provider: 'antigravity-cli' (official Antigravity CLI subscription) or 'gemini-api' (direct API)"
     )
     parser.add_argument(
         "--ids",
@@ -51,12 +60,11 @@ def main():
     )
     parser.add_argument(
         "--model",
-        default="gemini-2.5-flash",
-        help="Model name for AI boundary detector (default: gemini-2.5-flash)"
+        help="Optional model override for the selected provider"
     )
     parser.add_argument(
         "--api-key",
-        help="API key for AI model (or set GEMINI_API_KEY / GOOGLE_API_KEY environment variable)"
+        help="API key for direct Gemini API (or set GEMINI_API_KEY / GOOGLE_API_KEY environment variable)"
     )
     parser.add_argument(
         "--inputs",
@@ -92,17 +100,6 @@ def main():
         help="Reference placement layout in student UI (default: beside)"
     )
     parser.add_argument(
-        "--engine",
-        choices=["live", "offline"],
-        default="live",
-        help="Boundary detector engine: 'live' (production Live AI) or 'offline' (experimental autonomous parser)"
-    )
-    parser.add_argument(
-        "--offline",
-        action="store_true",
-        help="Shortcut to run with --engine offline without requiring API keys"
-    )
-    parser.add_argument(
         "--html",
         default=str(ROOT_DIR / "docs" / "index.html"),
         help="Path to save interactive HTML comparison viewer"
@@ -115,18 +112,36 @@ def main():
 
     args = parser.parse_args()
 
-    engine = "offline" if args.offline else args.engine
+    # Guard: Direct Gemini API key requirement
+    if args.provider == "gemini-api":
+        has_key = bool(args.api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"))
+        if not has_key:
+            print("\n" + "=" * 80)
+            print("❌ GEMINI API KEY REQUIRED")
+            print("=" * 80)
+            print("Direct Gemini API provider ('--provider gemini-api') requires an API key.")
+            print("To configure your key securely in your environment, run:")
+            print("   export GEMINI_API_KEY=\"your_api_key_here\"")
+            print("\nSecurity notice: Never paste your API key into ordinary chat, print it, or commit it.")
+            print("Alternatively, use the default Antigravity CLI provider:")
+            print("   python review.py --provider antigravity-cli")
+            print("=" * 80 + "\n")
+            sys.exit(1)
+
     inputs_dir = Path(args.inputs)
     output_json_path = Path(args.output_json)
     html_path = Path(args.html)
 
     print("=" * 80)
     print(" MEDICAL ASSESSMENT STEM ISOLATION REVIEWER")
-    if engine == "offline":
-        print(" Engine: Autonomous Semantic Parser (Offline / Experimental)")
+    if args.provider == "antigravity-cli":
+        cli_temp = AntigravityCLIProvider()
+        print(f" Engine: Antigravity CLI ('agy' v{cli_temp.cli_version}) | Model: {args.model or 'antigravity-default'}")
+        print(" Authentication: Antigravity Subscription Native Session")
     else:
-        print(f" Engine: Live AI Boundary Detector | Model: {args.model}")
-    print(" Architecture: Contract Schema -> Python Verbatim Slicing")
+        print(f" Engine: Direct Gemini API | Model: {args.model or 'gemini-2.5-flash'}")
+        print(" Authentication: GEMINI_API_KEY Environment Variable")
+    print(" Architecture: Genuine LLM Contract -> Deterministic Python Verbatim Slicing")
     print("=" * 80)
 
     cfg = {
@@ -140,10 +155,6 @@ def main():
         "reference_placement": args.reference_placement
     }
 
-    detector = None
-    if engine != "offline":
-        detector = AIBoundaryDetector(api_key=args.api_key, model_name=args.model)
-
     if args.file:
         file_path = Path(args.file)
         if not file_path.exists():
@@ -155,20 +166,25 @@ def main():
         contract, processed, meta = process_question_item(
             raw_text=raw_text,
             question_id=qid,
-            ai_detector=detector,
+            provider=args.provider,
             domain="Clinical Nursing",
             config=cfg,
-            engine=engine
+            api_key=args.api_key,
+            model_name=args.model
         )
         total_items = len(processed)
         passed_items = sum(
             1 for r in processed
-            if r.get("passed", False) and r.get("verification", {}).get("exact_match", False) and r.get("verification", {}).get("stem_under_500", False)
+            if r.get("passed", False)
+            and r.get("verification", {}).get("exact_match", False)
+            and r.get("verification", {}).get("stem_under_500", False)
+            and not r.get("verification", {}).get("review_gated", False)
         )
         preservation_rate = f"{(passed_items / total_items * 100):.1f}%" if total_items > 0 else "0.0%"
         payload = {
             "title": f"Review Output: {qid}",
-            "method": f"{'Offline Autonomous Parser' if engine == 'offline' else f'Live AI Boundary Detection ({args.model})'}.",
+            "method": f"LLM Boundary Detection ({args.provider}).",
+            "provider": args.provider,
             "summary": {
                 "total_items": total_items,
                 "passed_items": passed_items,
@@ -190,10 +206,10 @@ def main():
         payload = review_questions(
             inputs_dir=inputs_dir,
             question_ids=args.ids,
+            provider=args.provider,
             api_key=args.api_key,
             model_name=args.model,
-            config=cfg,
-            engine=engine
+            config=cfg
         )
 
     questions = payload["questions"]
@@ -206,7 +222,12 @@ def main():
     for q in questions:
         v = q.get("verification", {})
         after = q["after"]
-        passed = q.get("passed", False) and v.get("exact_match", False) and v.get("stem_under_500", False)
+        passed = (
+            q.get("passed", False)
+            and v.get("exact_match", False)
+            and v.get("stem_under_500", False)
+            and not v.get("review_gated", False)
+        )
         if not passed:
             all_passed = False
 
@@ -217,13 +238,14 @@ def main():
         if passed:
             verif_str = "0 added, 0 removed (order verified)"
         else:
-            verif_str = v.get("failure_reason", "NEEDS REVIEW")
+            verif_str = v.get("failure_reason") or ("REVIEW GATED" if v.get("review_gated") else "NEEDS REVIEW")
 
         print(f"{status_icon:<8} {q['id']:<10} {stem_str:<15} {ref_str:<12} {layout_str:<28} {verif_str}")
 
     print("-" * 88)
     summary = payload["summary"]
     print(f"\nSummary:")
+    print(f"  * Provider:                    {args.provider}")
     print(f"  * Total Processed Items:       {summary['total_items']}")
     print(f"  * Verified Passed Items:       {summary.get('passed_items', 0)}")
     print(f"  * All Stems <= 500 chars:      {summary['all_stems_under_500_chars']}")

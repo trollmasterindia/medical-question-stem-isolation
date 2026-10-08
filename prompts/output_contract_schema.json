@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "source_id": { "type": "string" },
+    "status": { "type": "string", "enum": ["proposed", "needs_review"] },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "start": { "type": "integer" },
+          "end": { "type": "integer" },
+          "kind": {
+            "type": "string",
+            "enum": ["stem", "reference", "option", "metadata", "layout", "response_template", "unresolved"]
+          }
+        },
+        "required": ["id", "start", "end", "kind"],
+        "additionalProperties": false
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "parent_group_id": { "type": ["string", "null"] },
+          "response_kind": {
+            "type": "string",
+            "enum": ["single_choice", "multiple_response", "short_answer", "true_false", "cloze", "ordering", "matching", "multipart", "unknown"]
+          },
+          "source_label_segment_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "stem_segment_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "reference_segment_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "option_groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "kind": { "type": "string", "enum": ["choice_bank", "matching_bank", "ordering_bank"] },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "segment_ids": { "type": "array", "items": { "type": "string" } }
+                    },
+                    "required": ["id", "segment_ids"],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": ["id", "kind", "options"],
+              "additionalProperties": false
+            }
+          },
+          "matching_rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "segment_ids": { "type": "array", "items": { "type": "string" } },
+                "option_group_id": { "type": ["string", "null"] }
+              },
+              "required": ["id", "segment_ids"],
+              "additionalProperties": false
+            }
+          },
+          "response_template_segment_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "depends_on_item_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "context_reuse": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "disposition": { "type": "string", "enum": ["proposed", "needs_review"] }
+        },
+        "required": [
+          "id",
+          "response_kind",
+          "source_label_segment_ids",
+          "stem_segment_ids",
+          "reference_segment_ids",
+          "disposition"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "segment_ids": { "type": "array", "items": { "type": "string" } },
+          "item_ids": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["code"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["source_id", "status", "segments", "items", "issues"],
+  "additionalProperties": false
+}

@@ -152,6 +152,10 @@ def slice_contract_item(
         parts.append(stem_text)
         if options:
             parts.extend(options)
+        if matching_rows_preserved:
+            for r in matching_rows_preserved:
+                if r.get("text"):
+                    parts.append(r["text"])
         if resp_template_text:
             parts.append(resp_template_text)
 
@@ -218,11 +222,24 @@ def contract_to_platform_items(
 ) -> List[Dict[str, Any]]:
     """Converts validated Output Contract into platform review items."""
     seg_dict = {s["id"]: s for s in contract.get("segments", [])}
+    contract_status = contract.get("status", "proposed")
+    issues = contract.get("issues", [])
+
+    # Collect any items flagged by controlled issues or contract-level review
+    flagged_item_ids = set()
+    for iss in issues:
+        for it_id in iss.get("item_ids", []):
+            flagged_item_ids.add(it_id)
+
     items = []
     for item in contract.get("items", []):
+        it_copy = dict(item)
+        if contract_status == "needs_review" or it_copy.get("id") in flagged_item_ids:
+            it_copy["disposition"] = "needs_review"
+
         items.append(slice_contract_item(
             raw_text=raw_text,
-            item=item,
+            item=it_copy,
             seg_dict=seg_dict,
             domain=domain,
             max_stem_chars=max_stem_chars
