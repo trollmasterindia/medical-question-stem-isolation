@@ -29,6 +29,7 @@ ROOT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT_DIR / "src"))
 
 from question_processor import review_questions, process_question_item
+from semantic_parser import AutonomousSemanticParser
 from html_generator import generate_html_viewer
 
 
@@ -76,6 +77,29 @@ def main():
         help="Path to save output JSON"
     )
     parser.add_argument(
+        "--contract-json",
+        default=str(ROOT_DIR / "data" / "master_contract_output.json"),
+        help="Path to save formal Master Output Contract JSON"
+    )
+    parser.add_argument(
+        "--split-policy",
+        choices=["preserve", "split_labeled_if_safe", "split_explicit_tasks_if_safe"],
+        default="split_labeled_if_safe",
+        help="Split policy for multi-part items (default: split_labeled_if_safe)"
+    )
+    parser.add_argument(
+        "--max-stem-chars",
+        type=int,
+        default=500,
+        help="Maximum allowed characters for stem (default: 500)"
+    )
+    parser.add_argument(
+        "--reference-placement",
+        choices=["unknown", "above", "beside"],
+        default="beside",
+        help="Reference placement layout in student UI (default: beside)"
+    )
+    parser.add_argument(
         "--html",
         default=str(ROOT_DIR / "docs" / "index.html"),
         help="Path to save interactive HTML comparison viewer"
@@ -99,6 +123,17 @@ def main():
     print(" Architecture: AI Semantic Boundaries -> Python Verbatim Slicing (Zero Text Loss)")
     print("=" * 80)
 
+    cfg = {
+        "max_stem_chars": args.max_stem_chars,
+        "split_policy": args.split_policy,
+        "matching_policy": "review",
+        "supports_ordering": False,
+        "supports_matching": False,
+        "supports_linked_items": False,
+        "supports_conditional_items": False,
+        "reference_placement": args.reference_placement
+    }
+
     if args.file:
         file_path = Path(args.file)
         if not file_path.exists():
@@ -110,8 +145,10 @@ def main():
         processed = process_question_item(
             raw_text=raw_text,
             question_id=qid,
-            mode=args.mode
+            mode=args.mode,
+            config=cfg
         )
+        contract = AutonomousSemanticParser.parse_to_contract(raw_text, source_id=qid, config=cfg)
         payload = {
             "title": f"Review Output: {qid}",
             "method": f"Dynamic boundary detection ({args.mode.upper()}).",
@@ -123,7 +160,8 @@ def main():
                 "split_screen_count": len([r for r in processed if r["after"]["layout"] == "split_screen_with_reference"]),
                 "single_column_count": len([r for r in processed if r["after"]["layout"] == "single_column_stem_only"])
             },
-            "questions": processed
+            "questions": processed,
+            "master_contracts": [contract]
         }
     else:
         if args.mode == "benchmark" and not splits_path.exists():
@@ -139,7 +177,8 @@ def main():
             question_ids=args.ids,
             mode=args.mode,
             api_key=args.api_key,
-            model_name=args.model
+            model_name=args.model,
+            config=cfg
         )
 
     questions = payload["questions"]
@@ -185,6 +224,14 @@ def main():
     compat_json = ROOT_DIR / "data" / "before_vs_after_questions.json"
     with open(compat_json, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
+
+    # Save formal Master Contract JSON if present
+    if "master_contracts" in payload and args.contract_json:
+        contract_json_path = Path(args.contract_json)
+        contract_json_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(contract_json_path, "w", encoding="utf-8") as f:
+            json.dump(payload["master_contracts"], f, indent=2, ensure_ascii=False)
+        print(f"[Saved Master Contract JSON] {contract_json_path}")
 
     # Generate HTML comparison viewer
     generate_html_viewer(payload, html_path)

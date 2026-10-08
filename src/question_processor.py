@@ -163,23 +163,24 @@ def process_question_item(
     question_id: str = "custom",
     mode: str = "auto",
     ai_detector: Optional[AIBoundaryDetector] = None,
-    domain: str = "Clinical Nursing"
+    domain: str = "Clinical Nursing",
+    config: Optional[Dict[str, Any]] = None
 ) -> List[Dict[str, Any]]:
     """
     Unified entry point to process any question item.
     - If mode == 'benchmark' and case is provided: uses benchmark spans with semantic routing.
-    - If mode == 'ai': invokes AIBoundaryDetector with prompts/extraction_prompt.md.
-    - If mode == 'auto': uses AutonomousSemanticParser to independently identify boundaries.
+    - If mode == 'ai': invokes AIBoundaryDetector with prompts/medical_stem_isolation_system_prompt.txt.
+    - If mode == 'auto': uses AutonomousSemanticParser to independently generate Output Contract and slice items.
     """
     if mode == "benchmark" and case is not None:
         return process_benchmark_case(raw_text, case)
 
     if mode == "ai":
         detector = ai_detector or AIBoundaryDetector()
-        return detector.detect_and_process(raw_text, question_id=question_id, domain=domain)
+        return detector.detect_and_process(raw_text, question_id=question_id, domain=domain, config=config)
 
     # Default: autonomous semantic parser
-    return AutonomousSemanticParser.decompose(raw_text, question_id=question_id, domain=domain)
+    return AutonomousSemanticParser.decompose(raw_text, question_id=question_id, domain=domain, config=config)
 
 
 def review_questions(
@@ -188,7 +189,8 @@ def review_questions(
     question_ids: Optional[List[str]] = None,
     mode: str = "auto",
     api_key: Optional[str] = None,
-    model_name: str = "gemini-2.5-flash"
+    model_name: str = "gemini-2.5-flash",
+    config: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """
     Executes the stem isolation workflow across target questions.
@@ -225,6 +227,7 @@ def review_questions(
         ai_detector = AIBoundaryDetector(api_key=api_key, model_name=model_name)
 
     results = []
+    contracts = []
     for qid in question_ids:
         raw_text = None
         if inputs_dir:
@@ -243,13 +246,18 @@ def review_questions(
 
         domain = case.get('domain', 'Clinical Nursing') if case else 'Clinical Nursing'
 
+        # Also generate master contract
+        contract = AutonomousSemanticParser.parse_to_contract(raw_text, source_id=qid, config=config)
+        contracts.append(contract)
+
         processed = process_question_item(
             raw_text=raw_text,
             case=case,
             question_id=qid,
             mode=mode,
             ai_detector=ai_detector,
-            domain=domain
+            domain=domain,
+            config=config
         )
         results.extend(processed)
 
@@ -267,7 +275,8 @@ def review_questions(
             "split_screen_count": len([r for r in results if r["after"]["layout"] == "split_screen_with_reference"]),
             "single_column_count": len([r for r in results if r["after"]["layout"] == "single_column_stem_only"])
         },
-        "questions": results
+        "questions": results,
+        "master_contracts": contracts
     }
 
     return payload

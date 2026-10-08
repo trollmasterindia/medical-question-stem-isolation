@@ -1,0 +1,70 @@
+GENERIC STEM ISOLATION — INTEGRATION NOTES
+8 October 2026
+
+Use medical-stem-isolation-system-prompt.txt as the system instruction. This is a proposed generic replacement, not a measured improvement in model accuracy. It was reviewed against the case families encountered; it has not been run through your production model or importer. No repository files were changed.
+
+1. ACTUALLY CALL THE MODEL
+The inspected repository at commit 9ed87ff3a34d7a88765e1d0f26b446ace535be3a reads expected_splits.json and uses question-specific branches. Replace that production boundary source with a real model response to raw_text plus config. Keep expected splits only in a separate evaluation harness, unavailable to the production model and transformation code. Never select behavior by benchmark question ID. The prompt cannot make that architectural change by itself. Its richer output contract is not a drop-in replacement for the current processor; implement the schema and mappings together with the model call.
+
+2. REQUEST SETTINGS
+Pass one immutable raw source string per complete item/group, with an opaque source_id. A minimal request has source_id, raw_text and config.
+
+Recommended initial config:
+max_stem_chars = 500
+split_policy = preserve
+matching_policy = review
+supports_ordering = false
+supports_matching = false
+supports_linked_items = false
+supports_conditional_items = false
+reference_placement = beside (ONLY if this is the actual UI)
+
+Enable split_labeled_if_safe or split_explicit_tasks_if_safe when the application is ready to create child items. Enable matching/ordering only when their existing response controls and grouped relationships are supported. Linked and conditional capabilities mean the UI can actually preserve and explain those dependencies, not merely that a database has parent_id.
+
+Options are assumed to be present in raw_text. If your importer already separates them, define that input boundary explicitly and pass their immutable original objects through; do not silently concatenate or reparse unrelated option strings. Do not use the same offset coordinates for a different source string.
+
+3. VALIDATE BEFORE APPLYING
+Implement a strict JSON schema for the documented contract. Python, not the model, must verify:
+- exact expected source_id; unique segment/item/option IDs; valid enums and fields;
+- integer offsets (reject booleans), 0 <= start < end <= len(raw_text);
+- segments are ordered and tile the entire source, starting at 0 and ending at len(raw_text), with no gaps/overlaps;
+- all referenced IDs exist; mapping order follows the source; there are no unintended repeated IDs within a field;
+- every substantive segment is used by an item or explicitly retained as unresolved for review; metadata/layout are still accounted for; field/option maps may explicitly include original layout segments, and the same segment is not rendered twice across one item’s content fields (association-only matching_rows/context_reuse references are allowed);
+- allowed roles agree, except the explicitly recorded prior-task-as-context reuse;
+- parent_group_id is a common opaque label, not a missing object reference; item dependencies are valid, acyclic and within supplied source scope; context_reuse agrees with an earlier dependent task;
+- option groups contain separate original options in order; matching rows and ranking banks are not mistaken for unrelated items;
+- unsupported response representations or dependency capabilities block automatic application;
+- all final stem lengths satisfy the actual field limit, using an agreed counting convention, or the item is blocked for review.
+
+For empty input, accept only an empty partition, no items and the empty_input review issue.
+
+Reject invalid output before writing question data. A bounded correction request may return the validation error codes and exact immutable input to the model. If still invalid, retain the original source and route to review. Do not repair semantic boundaries by arbitrary clipping, guesses or copied benchmark offsets.
+
+4. PYTHON SLICES; IT DOES NOT REWRITE
+Derive every clinical text component from raw_text[start:end]. Do not read generated segment text from an answer key. Do not trust model-returned copied text or computed lengths.
+
+Use Unicode code-point offsets consistently. Python strings and ordinary JavaScript string indexes differ for non-BMP characters; convert explicitly when needed. Preserve input newlines, tabs, Unicode and punctuation; avoid strip(), automatic newline conversion or normalization between model analysis and slicing.
+
+Keep the canonical raw text and full partition unchanged. Field views refer to those segments. The renderer may present separate blocks with CSS spacing and labels; these are UI presentation, not original source text. Under this strict contract, exported field strings must be exact concatenations of the declared source slices. Do not insert synthetic spaces or newlines. If the slices cannot produce a coherent display/export without adding text, use review instead. CSS spacing and generated UI labels remain presentation outside those source strings.
+
+Shared references reused in several child views are intentional references to one canonical source range. Do not compare the concatenation of all child views against the parent and call all repetition an error. Instead validate canonical coverage once, and separately validate each child's shared/local associations and declared reuse. Generated IDs/display labels are metadata, not source characters.
+
+5. VERIFY REAL OUTPUT, NOT A SUCCESS LABEL
+Source-order reconstruction from slices must equal the original raw_text exactly. Check hashes if useful. A character-frequency Counter alone cannot detect reordered characters or incorrect patient associations.
+
+Also validate actual rendered/exported field strings against the exact concatenation of declared source slices. Formatting that changes source-string characters is not permitted by this contract. Keeping a pristine before field does not prove the after fields are lossless.
+
+Compute counts, error lists and pass rates from checks. Never assign exact_match=true, characters_added=0, characters_removed=0 or preservation_rate=100% as fixed constants. Keep semantic review, structural validation, UI rendering, stem-length checks and clinical correctness separate. This feature does not validate medical answers.
+
+6. SAFE HANDLING OF HARD CASES
+- Context introductions stay with their referenced scenario/list. Response instructions stay with the task even when a vignette exists.
+- Several question sentences are not automatically several database questions. Use the configured split policy and actual task structure.
+- Conditional children retain their prior-task dependency; source text is never rewritten to hide it.
+- Missing prior context, missing numeric values, unsupported matching/ordering, ambiguous grouping, and spatial wording incompatible with the UI require review.
+- A complete task over 500 characters is an overflow, not permission to summarize or misclassify. The application must support approved decomposition, a longer field or a review route that retains the original source.
+- A prompt may flag risk but cannot guarantee that it detects every source defect or ambiguity.
+
+7. TEST WITHOUT LEAKAGE
+Evaluate on unseen raw questions as well as the supplied collection. Do not provide expected labels/offsets to the model. Keep related cases/source templates together when making development and held-out splits. Use clearly disclosed synthetic transport fixtures for CRLF, tabs, combining marks, emoji and malformed input; do not present those as additional real-source examples.
+
+Update the candidate expected labels for the agreed two-field convention before evaluation. Measure task/reference classification and dependency correctness separately from text preservation. Treat unresolved policy cases as review cases, not automatic exact-match failures. Have assessment staff adjudicate disagreements before declaring a gold benchmark.

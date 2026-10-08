@@ -1,44 +1,81 @@
 """
 prompt_loader.py
 
-Utility to load and inspect prompts/extraction_prompt.md.
-Extracts system instructions, platform constraints, and JSON schema
-for AI boundary detection models.
+Utility to load and inspect the master medical stem isolation system prompt
+(prompts/medical_stem_isolation_system_prompt.txt) and extraction guidelines.
 """
 
 from pathlib import Path
-from typing import Dict, Any, Tuple
-import re
+from typing import Dict, Any, Optional
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-PROMPT_FILE = ROOT_DIR / "prompts" / "extraction_prompt.md"
+MASTER_PROMPT_FILE = ROOT_DIR / "prompts" / "medical_stem_isolation_system_prompt.txt"
+LEGACY_PROMPT_FILE = ROOT_DIR / "prompts" / "extraction_prompt.md"
 
 
-def load_extraction_prompt_text() -> str:
-    """Reads the full extraction prompt markdown file."""
-    if not PROMPT_FILE.exists():
-        raise FileNotFoundError(f"Extraction prompt not found at {PROMPT_FILE}")
-    with open(PROMPT_FILE, "r", encoding="utf-8") as f:
-        return f.read()
+def get_default_config() -> Dict[str, Any]:
+    """Returns the recommended initial configuration defined in the contract."""
+    return {
+        "max_stem_chars": 500,
+        "split_policy": "split_labeled_if_safe",
+        "matching_policy": "review",
+        "supports_ordering": False,
+        "supports_matching": False,
+        "supports_linked_items": False,
+        "supports_conditional_items": False,
+        "reference_placement": "beside"
+    }
+
+
+def load_master_prompt_text() -> str:
+    """Reads the full master system prompt file."""
+    if MASTER_PROMPT_FILE.exists():
+        with open(MASTER_PROMPT_FILE, "r", encoding="utf-8") as f:
+            return f.read()
+    elif LEGACY_PROMPT_FILE.exists():
+        with open(LEGACY_PROMPT_FILE, "r", encoding="utf-8") as f:
+            return f.read()
+    raise FileNotFoundError("No system prompt found in prompts directory.")
 
 
 def load_system_instruction() -> str:
-    """
-    Extracts the core system instruction markdown block from extraction_prompt.md.
-    """
-    text = load_extraction_prompt_text()
-    match = re.search(r"## System Instructions\s+```markdown(.*?)```", text, re.DOTALL)
-    if match:
-        return match.group(1).strip()
-    return text.strip()
+    """Returns the system instruction text to be passed to LLM calls."""
+    return load_master_prompt_text()
 
 
 def load_json_schema_definition() -> str:
-    """
-    Extracts the JSON output schema from extraction_prompt.md.
-    """
-    text = load_extraction_prompt_text()
-    match = re.search(r"## Output JSON Schema\s+```json(.*?)```", text, re.DOTALL)
-    if match:
-        return match.group(1).strip()
-    return "{}"
+    """Returns the Output Contract schema summary from the prompt."""
+    return """
+{
+  "source_id": "string",
+  "status": "proposed | needs_review",
+  "segments": [
+    {"id": "string", "start": 0, "end": 100, "kind": "stem | reference | option | metadata | layout | response_template | unresolved"}
+  ],
+  "items": [
+    {
+      "id": "string",
+      "parent_group_id": "string | null",
+      "response_kind": "single_choice | multiple_response | short_answer | true_false | cloze | ordering | matching | multipart | unknown",
+      "source_label_segment_ids": ["string"],
+      "stem_segment_ids": ["string"],
+      "reference_segment_ids": ["string"],
+      "option_groups": [
+        {
+          "id": "string",
+          "kind": "choice_bank | matching_bank | ordering_bank",
+          "options": [{"id": "string", "segment_ids": ["string"]}]
+        }
+      ],
+      "matching_rows": [],
+      "response_template_segment_ids": [],
+      "depends_on_item_ids": [],
+      "context_reuse": [],
+      "disposition": "proposed | needs_review"
+    }
+  ],
+  "issues": [
+    {"code": "controlled_issue_code", "segment_ids": ["string"], "item_ids": ["string"]}
+  ]
+}
+"""

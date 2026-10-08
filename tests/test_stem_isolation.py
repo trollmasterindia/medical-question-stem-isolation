@@ -77,12 +77,12 @@ class TestStemIsolation(unittest.TestCase):
         """Test that extraction_prompt.md is loaded, contains system instructions and JSON schema."""
         sys_inst = load_system_instruction()
         self.assertTrue(len(sys_inst) > 500)
-        self.assertIn("medical assessment parser", sys_inst)
+        self.assertTrue("semantic span annotator" in sys_inst or "medical assessment" in sys_inst)
         self.assertIn("500", sys_inst)
 
         schema = load_json_schema_definition()
         self.assertTrue(len(schema) > 50)
-        self.assertIn("question_id", schema)
+        self.assertTrue("source_id" in schema or "question_id" in schema)
         self.assertIn("segments", schema)
 
     def test_unseen_question_independent_processing(self):
