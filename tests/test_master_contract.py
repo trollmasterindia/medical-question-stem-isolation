@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT_DIR / "src"))
 
 from prompt_loader import load_master_prompt_text, get_default_config
 from contract_validator import ContractValidator
-from semantic_parser import AutonomousSemanticParser, build_gap_free_partition
+from experimental.autonomous_parser import AutonomousSemanticParser, build_gap_free_partition
 from contract_slicer import contract_to_platform_items
 
 

@@ -4,22 +4,25 @@ review.py - CLI Reviewer for Medical Assessment Stem Isolation
 
 Executes the stem isolation workflow across medical questions using the
 'AI Eyes, Python Scissors' method:
+- Live AI boundary detection is the default and only production detector.
 - Python performs 100% of the string slicing directly on the raw text.
-- Character multiset verification guarantees zero text alteration or omission.
+- Character-order and content verification guarantees zero text alteration or omission.
 - Admin constraint enforced: Stem <= 500 characters.
-- Live AI boundary detection using prompts/extraction_prompt.md or autonomous semantic engine.
+- Forwards configured model and credentials consistently for batch and single-file processing.
+- Exports exact model-returned contracts to data/master_contract_output.json.
 - Generates interactive Before vs After HTML comparison viewer.
 - Exports verified machine-readable JSON.
 
 Usage:
-    python review.py                                  # Review benchmark questions (Auto mode)
-    python review.py --mode ai                        # Review using live LLM with extraction prompt
+    python review.py                                  # Review all questions in data/inputs using live AI
     python review.py --file path/to/new_question.txt  # Review an arbitrary unseen question file
     python review.py --ids Q001 Q025 Q063             # Review specific questions
     python review.py --open                           # Review and open HTML viewer in browser
 """
 
 import sys
+import os
+import json
 import argparse
 import webbrowser
 from pathlib import Path
@@ -29,7 +32,7 @@ ROOT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT_DIR / "src"))
 
 from question_processor import review_questions, process_question_item
-from semantic_parser import AutonomousSemanticParser
+from ai_boundary_detector import AIBoundaryDetector
 from html_generator import generate_html_viewer
 
 
@@ -47,24 +50,13 @@ def main():
         help="Path to an individual raw question text file to process independently"
     )
     parser.add_argument(
-        "--mode",
-        choices=["auto", "ai", "benchmark"],
-        default="auto",
-        help="Detection mode: 'auto' (autonomous content-driven parser), 'ai' (live LLM using prompts/extraction_prompt.md), 'benchmark' (annotated benchmark spans)"
-    )
-    parser.add_argument(
         "--model",
         default="gemini-2.5-flash",
-        help="Model name for AI mode (default: gemini-2.5-flash)"
+        help="Model name for AI boundary detector (default: gemini-2.5-flash)"
     )
     parser.add_argument(
         "--api-key",
         help="API key for AI model (or set GEMINI_API_KEY / GOOGLE_API_KEY environment variable)"
-    )
-    parser.add_argument(
-        "--splits",
-        default=str(ROOT_DIR / "data" / "expected_splits.json"),
-        help="Path to expected splits JSON file (used in benchmark mode)"
     )
     parser.add_argument(
         "--inputs",
@@ -112,15 +104,14 @@ def main():
 
     args = parser.parse_args()
 
-    splits_path = Path(args.splits)
     inputs_dir = Path(args.inputs)
     output_json_path = Path(args.output_json)
     html_path = Path(args.html)
 
     print("=" * 80)
     print(" MEDICAL ASSESSMENT STEM ISOLATION REVIEWER")
-    print(f" Mode: {args.mode.upper()} | Model: {args.model if args.mode == 'ai' else 'Autonomous Engine'}")
-    print(" Architecture: AI Semantic Boundaries -> Python Verbatim Slicing (Zero Text Loss)")
+    print(f" Engine: Live AI Boundary Detector | Model: {args.model}")
+    print(" Architecture: Live AI Contract -> Python Verbatim Slicing")
     print("=" * 80)
 
     cfg = {
@@ -134,6 +125,8 @@ def main():
         "reference_placement": args.reference_placement
     }
 
+    detector = AIBoundaryDetector(api_key=args.api_key, model_name=args.model)
+
     if args.file:
         file_path = Path(args.file)
         if not file_path.exists():
@@ -142,40 +135,42 @@ def main():
         with open(file_path, "r", encoding="utf-8") as f:
             raw_text = f.read()
         qid = file_path.stem
-        processed = process_question_item(
+        contract, processed, meta = detector.detect_and_process(
             raw_text=raw_text,
             question_id=qid,
-            mode=args.mode,
+            domain="Clinical Nursing",
             config=cfg
         )
-        contract = AutonomousSemanticParser.parse_to_contract(raw_text, source_id=qid, config=cfg)
+        total_items = len(processed)
+        passed_items = sum(
+            1 for r in processed
+            if r.get("passed", False) and r.get("verification", {}).get("exact_match", False) and r.get("verification", {}).get("stem_under_500", False)
+        )
+        preservation_rate = f"{(passed_items / total_items * 100):.1f}%" if total_items > 0 else "0.0%"
         payload = {
             "title": f"Review Output: {qid}",
-            "method": f"Dynamic boundary detection ({args.mode.upper()}).",
+            "method": f"Live AI Boundary Detection ({args.model}).",
             "summary": {
-                "total_items": len(processed),
-                "exact_text_preservation_rate": "100%",
-                "all_stems_under_500_chars": all(r["after"]["fits_500_char_limit"] for r in processed),
-                "average_stem_length": round(sum(r["after"]["stem_char_count"] for r in processed) / len(processed), 1),
+                "total_items": total_items,
+                "passed_items": passed_items,
+                "exact_text_preservation_rate": preservation_rate,
+                "all_stems_under_500_chars": all(r["after"]["fits_500_char_limit"] for r in processed) if processed else False,
+                "average_stem_length": round(sum(r["after"]["stem_char_count"] for r in processed) / total_items, 1) if total_items > 0 else 0,
                 "split_screen_count": len([r for r in processed if r["after"]["layout"] == "split_screen_with_reference"]),
                 "single_column_count": len([r for r in processed if r["after"]["layout"] == "single_column_stem_only"])
             },
             "questions": processed,
-            "master_contracts": [contract]
+            "master_contracts": [contract],
+            "execution_metadata": [meta]
         }
     else:
-        if args.mode == "benchmark" and not splits_path.exists():
-            print(f"Error: Splits file not found at {splits_path}")
-            sys.exit(1)
         if not inputs_dir.exists():
             print(f"Error: Inputs directory not found at {inputs_dir}")
             sys.exit(1)
 
         payload = review_questions(
-            splits_path=splits_path if splits_path.exists() else None,
             inputs_dir=inputs_dir,
             question_ids=args.ids,
-            mode=args.mode,
             api_key=args.api_key,
             model_name=args.model,
             config=cfg
@@ -189,17 +184,20 @@ def main():
 
     all_passed = True
     for q in questions:
-        v = q["verification"]
+        v = q.get("verification", {})
         after = q["after"]
-        passed = v["exact_match"] and v["stem_under_500"]
+        passed = q.get("passed", False) and v.get("exact_match", False) and v.get("stem_under_500", False)
         if not passed:
             all_passed = False
 
-        status_icon = "✅ PASS" if passed else "❌ FAIL"
+        status_icon = "✅ PASS" if passed else "❌ REVIEW"
         stem_str = f"{after['stem_char_count']} chars"
         ref_str = f"{after['reference_char_count']} chars" if after['reference'] else "None (0c)"
         layout_str = after["layout"]
-        verif_str = f"0 added, 0 removed" if v["exact_match"] else "TEXT MISMATCH"
+        if passed:
+            verif_str = "0 added, 0 removed (order verified)"
+        else:
+            verif_str = v.get("failure_reason", "NEEDS REVIEW")
 
         print(f"{status_icon:<8} {q['id']:<10} {stem_str:<15} {ref_str:<12} {layout_str:<28} {verif_str}")
 
@@ -207,14 +205,14 @@ def main():
     summary = payload["summary"]
     print(f"\nSummary:")
     print(f"  * Total Processed Items:       {summary['total_items']}")
+    print(f"  * Verified Passed Items:       {summary.get('passed_items', 0)}")
     print(f"  * All Stems <= 500 chars:      {summary['all_stems_under_500_chars']}")
     print(f"  * Average Stem Length:         {summary['average_stem_length']} chars")
     print(f"  * Split-Screen Items:          {summary['split_screen_count']}")
     print(f"  * Single-Column Items:         {summary['single_column_count']}")
-    print(f"  * Zero Text Alteration Rate:   {summary['exact_text_preservation_rate']}")
+    print(f"  * Exact Preservation Rate:     {summary['exact_text_preservation_rate']}")
 
     # Save output JSON
-    import json
     output_json_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_json_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
@@ -225,7 +223,7 @@ def main():
     with open(compat_json, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
 
-    # Save formal Master Contract JSON if present
+    # Save exact formal Master Contract JSON returned by model
     if "master_contracts" in payload and args.contract_json:
         contract_json_path = Path(args.contract_json)
         contract_json_path.parent.mkdir(parents=True, exist_ok=True)
@@ -246,10 +244,9 @@ def main():
         webbrowser.open(f"file://{html_path.resolve()}")
 
     if not all_passed:
-        print("\n❌ Warning: Some items failed verification or exceeded the 500-character limit!")
-        sys.exit(1)
+        print("\n⚠️ Notice: Items with status 'needs_review' or validation errors require inspection.")
     else:
-        print("\n✨ All items passed zero-text-loss and stem character limit constraints perfectly!")
+        print("\n✨ All processed items passed exact source preservation and stem character constraints!")
 
 
 if __name__ == "__main__":

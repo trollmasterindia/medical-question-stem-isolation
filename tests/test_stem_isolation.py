@@ -8,8 +8,7 @@ base_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(base_dir / "src"))
 
 from prompt_loader import load_system_instruction, load_json_schema_definition
-from semantic_parser import AutonomousSemanticParser
-from question_processor import process_question_item
+from experimental.autonomous_parser import AutonomousSemanticParser
 
 
 class TestStemIsolation(unittest.TestCase):
@@ -98,7 +97,7 @@ class TestStemIsolation(unittest.TestCase):
             "C. Arterial dilation\n"
             "D. Parasympathetic blockade"
         )
-        res = process_question_item(raw, question_id="NEW_UNSEEN_001", mode="auto")
+        res = AutonomousSemanticParser.decompose(raw, question_id="NEW_UNSEEN_001")
         self.assertEqual(len(res), 1)
         item = res[0]
         self.assertEqual(item["id"], "NEW_UNSEEN_001")
@@ -120,7 +119,7 @@ class TestStemIsolation(unittest.TestCase):
             "a. What is the total recommended daily dosage in mg for this child?\n\n"
             "b. How many mg should the nurse administer per dose?"
         )
-        res = process_question_item(raw, question_id="NEW_MULTIPART_002", mode="auto")
+        res = AutonomousSemanticParser.decompose(raw, question_id="NEW_MULTIPART_002")
         self.assertEqual(len(res), 2)
         sub_a = res[0]
         sub_b = res[1]
@@ -145,7 +144,7 @@ class TestStemIsolation(unittest.TestCase):
             "C. Bradycardia\n"
             "D. Oliguria"
         )
-        res = process_question_item(raw, question_id="NEW_INST_ONLY_003", mode="auto")
+        res = AutonomousSemanticParser.decompose(raw, question_id="NEW_INST_ONLY_003")
         self.assertEqual(len(res), 1)
         item = res[0]
         self.assertEqual(item["after"]["layout"], "single_column_stem_only")

@@ -1,12 +1,12 @@
 # Medical Assessment Item Stem Isolation & Reviewer Engine
 
-> **Deterministic medical assessment question parser and layout engine combining AI semantic boundary identification with Python verbatim string slicing.**  
-> Built for psychometric item-writing standards, 500-character database constraints, dual-layout student UI rendering, and **100% exact text preservation (0% character loss)**.
+> **Production AI boundary detector and layout engine combining Live AI Output Contracts with Python verbatim string slicing.**  
+> Built for psychometric item-writing standards, 500-character database constraints, dual-layout student UI rendering, and **exact source order and content preservation (zero text loss)**.
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Test Suite](https://img.shields.io/badge/tests-all%20passing-brightgreen.svg)]()
-[![Zero Text Loss](https://img.shields.io/badge/text%20preservation-100%25-success.svg)]()
-[![Stems Under 500c](https://img.shields.io/badge/stems%20%E2%89%A4%20500c-100%25-success.svg)]()
+[![Zero Text Loss](https://img.shields.io/badge/text%20preservation-order%20verified-success.svg)]()
+[![Stems Under 500c](https://img.shields.io/badge/stems%20%E2%89%A4%20500c-strictly%20enforced-success.svg)]()
 
 ---
 
@@ -19,11 +19,12 @@ When pulling this repository in a fresh workspace or asking an AI assistant to r
 git clone https://github.com/trollmasterindia/medical-question-stem-isolation.git
 cd medical-question-stem-isolation
 
-# 2. Run the review pipeline on the benchmark question set
+# 2. Run the review pipeline on question files using Live AI
+# Make sure GEMINI_API_KEY (or GOOGLE_API_KEY) is set in your environment
 python3 review.py --open
 
-# 3. Run unit tests
-python3 -m unittest discover -s tests
+# 3. Run full unit test suite
+python3 -m unittest discover -s tests -v
 ```
 
 ### Reviewing Specific Questions
@@ -38,128 +39,98 @@ You can process ANY arbitrary, unannotated medical question file without needing
 python3 review.py --file path/to/any_question.txt --open
 ```
 
-### Execution Modes
-- `--mode auto` (Default): Uses the autonomous, content-driven semantic boundary engine to parse questions independently with ZERO hardcoded question IDs.
-- `--mode ai`: Connects to live LLMs (e.g. Gemini 2.5 Flash) via `google.genai`, directly loading system instructions and schema from `prompts/extraction_prompt.md`.
-- `--mode benchmark`: Evaluates benchmark items against annotated dataset spans.
-
+### Passing Model and Credentials Consistently
 ```bash
-# Run with live Gemini model using extraction prompt
-python3 review.py --mode ai --api-key YOUR_GEMINI_KEY
-
-# Run benchmark evaluation
-python3 review.py --mode benchmark
+# Forward model name and API key directly
+python3 review.py --model gemini-2.5-flash --api-key YOUR_API_KEY
 ```
 
 ---
 
-## 💡 How to Ask an AI Assistant in a New Session
+## 🏗️ Architecture: Live AI Contract + Python Verbatim Slicing
 
-Simply prompt the agent:
-> *"I have cloned this repo. Please review these questions [provide IDs, question text, or files] using `review.py`. Ensure stems are <= 500 characters, reference is properly assigned, and show me the Before vs After HTML output and JSON."*
-
-The pipeline loads [`prompts/extraction_prompt.md`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/prompts/extraction_prompt.md) and executes [`review.py`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/review.py).
-
----
-
-## 🏗️ Architecture: "AI Eyes, Python Scissors"
-
-To guarantee zero text hallucination, zero character loss, and 100% reproducible parsing, semantic analysis is strictly decoupled from string extraction:
+To guarantee zero hallucination, zero text alteration, and strict adherence to database constraints, the pipeline implements the following architecture:
 
 ```
-[Raw Question Text (Verbatim Input)]
-                 │
-                 ▼
-       AI: Semantic Boundary Detection
-    • Reads question and identifies role spans [start, end]
-    • Classifies components: [Reference] [Stem] [Option] [Metadata]
-    • Flags multi-part subquestions and exhibits
-                 │
-                 ▼
-       Python: Deterministic String Slicing
-    • Executes: raw_text[stem_start:stem_end]
-    • Strictly isolates stem (<= 500 characters)
-    • Allocates reference and distractors
-                 │
-                 ▼
-       Multiset Character Verification
-    • Frequency count analysis: Counter(raw) == Counter(extracted)
-    • Asserts: Characters Added == 0, Characters Removed == 0
-                 │
-                 ▼
-       Interactive Before vs After Viewer & JSON Export
-    • docs/index.html (Interactive layout comparator with JSON modals)
-    • data/review_output.json (Complete machine-readable JSON)
+[Immutable Raw Question Text] + [Opaque source_id] + [Configuration]
+                            │
+                            ▼
+              Live AI Boundary Detector
+     • Master system instruction: prompts/medical_stem_isolation_system_prompt.txt
+     • Returns canonical partition tiling 0..len(raw_text)
+     • Never accesses benchmark answer keys or question-specific rules
+     • Bounded retry on API error or contract validation failure
+                            │
+                            ▼
+           Deterministic ContractValidator
+     • Rejects booleans in offsets, overlapping spans, dangling IDs
+     • Ensures gap-free partition covering entire source exactly
+     • Enforces controlled issue codes and review routing
+                            │
+                            ▼
+             Python Verbatim Slicing Adapter
+     • Derives every clinical text component: raw_text[start:end]
+     • Zero synthetic spaces or newlines inserted
+     • Verifies character sequence order (clean_raw == clean_proc)
+     • Enforces review gating: blocks automatic PASS for needs_review
+     • Preserves matching rows, response templates, dependencies, context reuse
+                            │
+                            ▼
+     Interactive Before vs After Viewer & Exact Contract Exports
+     • docs/index.html (Interactive layout comparator with JSON modals)
+     • data/review_output.json (Platform items with computed metrics)
+     • data/master_contract_output.json (Exact model-returned contracts)
 ```
 
 ---
 
-## 📐 Layout & Routing Rules
+## 📐 Production Principles & Integration Notes
 
-### 1. The 500-Character Stem Constraint
-- Every item stem **must be $\le 500$ characters**.
-- Patient vignettes, histories, lab tables, and clinical exhibits are extracted to `reference`.
-
-### 2. Dual Student UI Layout
-- **Split-Screen Layout (when `reference` exists):**
-  - **Left Pane:** Clinical scenario / exhibit / protocol.
-  - **Right Top:** Focused question stem ($\le 500$ characters).
-  - **Right Bottom:** Distractor options (A, B, C, D).
-- **Single-Column Layout (when `reference` is empty):**
-  - **Top:** Question stem ($\le 500$ characters).
-  - **Bottom:** Distractor options.
-
-### 3. The Instruction Routing Rule
-- **Scenario-Linked Instructions (e.g. Q003, Q095):** When an instruction introduces background materials (e.g., *"Consider the following scenario..."*), it is placed in the **Reference** pane above the vignette.
-- **Instruction-Only Items (e.g. Q063):** When a question has a test-taking instruction (e.g., *"Unless instructed otherwise, choose ALL correct answers..."*) but **NO reference scenario or exhibits**, the instruction remains with the **Stem** (total 136 characters). This avoids creating an artificial empty split screen and renders cleanly in a single-column layout.
-
-### 4. Multi-Part Subquestion Decomposition (e.g. Q080, Q082, Q073, Q074, Q084, Q085)
-- Parent clinical case studies containing sub-parts `(a)`, `(b)` or `1.`, `2.` are decomposed into **independent platform items** (e.g. `Q080-a`, `Q080-b`).
-- Common clinical guidelines are inherited into each subquestion's reference.
-- Progressive disclosures or specific patient exhibits (e.g., 17-kg vs 14-kg patient) attach only to their respective subquestion.
-
----
-
-## 🖥️ Interactive Before vs After Viewer Features
-
-The viewer located at [`docs/index.html`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/docs/index.html) provides:
-1. **Instant Search & Filters:**
-   - Search by Question ID or clinical keyword.
-   - Filter pills: `All`, `Split-Screen (With Reference)`, `Single-Page (Stem Only)`, and `Subquestions`.
-2. **Side-by-Side Before vs After Layouts:**
-   - **Before:** Shows the unparsed input item (giant single text block, character count badge).
-   - **After:** Shows the isolated student exam interface (split-screen or single-column).
-3. **Question-Level JSON Inspection:**
-   - Click **"View JSON"** on any question card to open a modal with formatted JSON.
-   - 1-click **"Copy JSON"** button to copy directly to your clipboard.
-4. **Export All JSON:**
-   - Download the complete verified [`data/review_output.json`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/data/review_output.json) directly from the header.
+1. **Live AI as Default and Only Production Detector:**  
+   Runtime execution invokes `AIBoundaryDetector`. All runtime calls and fallbacks to `AutonomousSemanticParser` are removed. Offline parser code is isolated in `src/experimental/autonomous_parser.py`.
+2. **Deterministic Failure & Review Routing:**  
+   If API credentials are missing, network calls fail, or the response fails schema validation, the pipeline performs bounded retries. If retries fail, it returns a `needs_review` failure contract retaining the complete original raw text. It never substitutes regex or benchmark answers.
+3. **No Leakage:**  
+   Inference receives only the immutable raw text, opaque source ID, and config. It has zero access to `expected_splits.json`.
+4. **Credential & Secret Protection:**  
+   Execution tracks `engine`, `model`, `prompt_hash`, and `source_hash`. API keys and credentials are never written to logs or contract exports.
+5. **Exact Contract Export:**  
+   The contract exported to `data/master_contract_output.json` is the exact contract returned by the live model.
+6. **Order-Aware Verification:**  
+   Verification asserts both multiset character frequency equality and exact character sequence order (`clean_raw == clean_proc`). Hardcoded pass claims and constant 100% strings are eliminated; all metrics are computed dynamically.
 
 ---
 
 ## 📂 Repository Structure
 
 ```
-├── README.md                      # Complete documentation & usage guide
-├── review.py                      # Root CLI reviewer tool
+├── README.md                                  # Complete documentation & usage guide
+├── review.py                                  # CLI reviewer entry point (Live AI default)
 ├── prompts/
-│   └── extraction_prompt.md       # Exact LLM system instructions & schema
-├── src/
-│   ├── prompt_loader.py           # Loads & parses prompts/extraction_prompt.md (system prompt + schema)
-│   ├── ai_boundary_detector.py    # AI boundary detector (Gemini/LLM integration + offline fallback)
-│   ├── semantic_parser.py         # Autonomous content-driven boundary parser (zero hardcoded IDs)
-│   ├── stem_isolator.py           # Python scissors: string slicing & multiset verification
-│   ├── question_processor.py      # Core parser, rule evaluator & subquestion decomposer
-│   └── html_generator.py          # Modern Before vs After HTML viewer generator
-├── data/
-│   ├── review_output.json         # Standardized, verified JSON output for all questions
-│   ├── expected_splits.json       # Benchmark spans for 100 medical items
-│   ├── inputs/                    # 100 raw benchmark input text files (Q001.txt ... Q100.txt)
-│   └── stem_isolation_comparison.html
+│   ├── medical_stem_isolation_system_prompt.txt # Master system instruction prompt
+│   └── extraction_prompt.md                   # Legacy reference schema
 ├── docs/
-│   └── index.html                 # Interactive comparison viewer (GitHub Pages ready)
+│   ├── implementation-notes.txt               # Integration guidelines & requirements
+│   └── index.html                             # Interactive comparison viewer
+├── src/
+│   ├── ai_boundary_detector.py                # Production Live AI detector (retries, hashes, validation)
+│   ├── contract_validator.py                  # Strict schema, offset, and tiling validator
+│   ├── contract_slicer.py                     # Deterministic Python slicing, order checks, review gating
+│   ├── prompt_loader.py                       # Loads master system prompt & default config
+│   ├── question_processor.py                  # Batch and single-item orchestration
+│   ├── html_generator.py                      # Interactive Before vs After HTML viewer generator
+│   ├── stem_isolator.py                       # Low-level slicing utilities
+│   └── experimental/
+│       └── autonomous_parser.py               # Isolated offline parser (tests/experimental only)
+├── data/
+│   ├── review_output.json                     # Output items with calculated metrics
+│   ├── master_contract_output.json            # Exact model-returned contracts
+│   ├── expected_splits.json                   # Isolated evaluation benchmark
+│   └── inputs/                                # Raw input text files (Q001.txt ... Q100.txt)
 └── tests/
-    └── test_stem_isolation.py     # Automated test suite (zero text loss, <= 500c stems)
+    ├── test_production_ai_pipeline.py         # Requirement 9 unit tests with mock responses
+    ├── test_master_contract.py                # Master contract validation and tiling tests
+    └── test_stem_isolation.py                 # Core isolation and layout tests
 ```
 
 ---
@@ -167,3 +138,4 @@ The viewer located at [`docs/index.html`](file:///Users/nipunmehra/.gemini/antig
 ## 📄 License
 
 Distributed under the MIT License. Clinical teaching questions are derived from published educational open-access resources (WisTech Open/Open RN and OpenStax under CC BY 4.0).
+
