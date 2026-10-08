@@ -1,6 +1,6 @@
 {
   "title": "Medical Assessment Stem Isolation - Reviewer Output",
-  "method": "AI identifies boundary spans [start, end]; Python slices original text directly (0% text alteration).",
+  "method": "AI Boundary Detection with Verbatim Python Slicing (Zero Text Loss). Execution Mode: BENCHMARK.",
   "summary": {
     "total_items": 46,
     "exact_text_preservation_rate": "100%",

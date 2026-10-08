@@ -1,0 +1,6 @@
+Pediatric Inpatient Dosing Case:
+A 6-year-old child weighing 20 kg is prescribed Cefazolin IV for cellulitis. The recommended daily dosage is 50 mg/kg/day divided into 3 equal doses every 8 hours.
+
+a. What is the total recommended daily dosage in mg for this child?
+
+b. How many mg should the nurse administer per dose?

@@ -32,14 +32,33 @@ You can review any specific questions by ID:
 python3 review.py --ids Q001 Q025 Q063 Q080
 ```
 
+### Reviewing Unseen / Arbitrary Question Files
+You can process ANY arbitrary, unannotated medical question file without needing entries in `expected_splits.json`:
+```bash
+python3 review.py --file path/to/any_question.txt --open
+```
+
+### Execution Modes
+- `--mode auto` (Default): Uses the autonomous, content-driven semantic boundary engine to parse questions independently with ZERO hardcoded question IDs.
+- `--mode ai`: Connects to live LLMs (e.g. Gemini 2.5 Flash) via `google.genai`, directly loading system instructions and schema from `prompts/extraction_prompt.md`.
+- `--mode benchmark`: Evaluates benchmark items against annotated dataset spans.
+
+```bash
+# Run with live Gemini model using extraction prompt
+python3 review.py --mode ai --api-key YOUR_GEMINI_KEY
+
+# Run benchmark evaluation
+python3 review.py --mode benchmark
+```
+
 ---
 
 ## 💡 How to Ask an AI Assistant in a New Session
 
 Simply prompt the agent:
-> *"I have cloned this repo. Please review these questions [provide IDs or question text] using `review.py`. Ensure stems are <= 500 characters, reference is properly assigned, and show me the Before vs After HTML output and JSON."*
+> *"I have cloned this repo. Please review these questions [provide IDs, question text, or files] using `review.py`. Ensure stems are <= 500 characters, reference is properly assigned, and show me the Before vs After HTML output and JSON."*
 
-The agent will read [`prompts/extraction_prompt.md`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/prompts/extraction_prompt.md) and execute [`review.py`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/review.py).
+The pipeline loads [`prompts/extraction_prompt.md`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/prompts/extraction_prompt.md) and executes [`review.py`](file:///Users/nipunmehra/.gemini/antigravity-ide/scratch/medical-question-stem-isolation/review.py).
 
 ---
 
@@ -126,6 +145,9 @@ The viewer located at [`docs/index.html`](file:///Users/nipunmehra/.gemini/antig
 ├── prompts/
 │   └── extraction_prompt.md       # Exact LLM system instructions & schema
 ├── src/
+│   ├── prompt_loader.py           # Loads & parses prompts/extraction_prompt.md (system prompt + schema)
+│   ├── ai_boundary_detector.py    # AI boundary detector (Gemini/LLM integration + offline fallback)
+│   ├── semantic_parser.py         # Autonomous content-driven boundary parser (zero hardcoded IDs)
 │   ├── stem_isolator.py           # Python scissors: string slicing & multiset verification
 │   ├── question_processor.py      # Core parser, rule evaluator & subquestion decomposer
 │   └── html_generator.py          # Modern Before vs After HTML viewer generator
