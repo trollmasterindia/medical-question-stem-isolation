@@ -24,12 +24,38 @@ def process_question_item(
     question_id: str = "custom",
     ai_detector: Optional[AIBoundaryDetector] = None,
     domain: str = "Clinical Nursing",
-    config: Optional[Dict[str, Any]] = None
+    config: Optional[Dict[str, Any]] = None,
+    engine: str = "live"
 ) -> Tuple[Dict[str, Any], List[Dict[str, Any]], Dict[str, Any]]:
     """
-    Unified production entry point to process a question item using live AI.
+    Unified entry point to process a question item.
+    Defaults to live AI detector. Also supports offline experimental parser when requested.
     Returns (contract, platform_items, execution_metadata).
     """
+    if engine == "offline":
+        import hashlib
+        from experimental.autonomous_parser import AutonomousSemanticParser
+        from contract_validator import ContractValidator
+        from contract_slicer import contract_to_platform_items
+
+        contract = AutonomousSemanticParser.parse_to_contract(raw_text, source_id=question_id, config=config)
+        is_valid, validation_errors = ContractValidator.validate(raw_text, contract, expected_source_id=question_id, config=config)
+        items = contract_to_platform_items(
+            contract=contract,
+            raw_text=raw_text,
+            domain=domain,
+            max_stem_chars=config.get("max_stem_chars", 500) if config else 500
+        )
+        meta = {
+            "engine": "offline-autonomous-semantic-parser",
+            "model": "offline-rule-based",
+            "prompt_hash": "",
+            "source_hash": hashlib.sha256(raw_text.encode("utf-8")).hexdigest(),
+            "status": "success" if is_valid else "invalid",
+            "retries_used": 0
+        }
+        return contract, items, meta
+
     detector = ai_detector or AIBoundaryDetector()
     return detector.detect_and_process(
         raw_text=raw_text,
@@ -44,11 +70,12 @@ def review_questions(
     question_ids: Optional[List[str]] = None,
     api_key: Optional[str] = None,
     model_name: str = "gemini-2.5-flash",
-    config: Optional[Dict[str, Any]] = None
+    config: Optional[Dict[str, Any]] = None,
+    engine: str = "live"
 ) -> Dict[str, Any]:
     """
-    Executes the stem isolation workflow across target questions using Live AI.
-    Discovers and processes every requested input file without hardcoded selections.
+    Executes the stem isolation workflow across target questions.
+    Defaults to Live AI Boundary Detection. Discovers and processes every requested input file.
     """
     files_to_process = []
     if inputs_dir and inputs_dir.exists():
@@ -68,7 +95,9 @@ def review_questions(
         for qid in question_ids:
             files_to_process.append((qid, None))
 
-    detector = AIBoundaryDetector(api_key=api_key, model_name=model_name)
+    detector = None
+    if engine != "offline":
+        detector = AIBoundaryDetector(api_key=api_key, model_name=model_name)
 
     results = []
     contracts = []
@@ -85,12 +114,21 @@ def review_questions(
             continue
 
         domain = "Clinical Nursing"
-        contract, processed_items, meta = detector.detect_and_process(
-            raw_text=raw_text,
-            question_id=qid,
-            domain=domain,
-            config=config
-        )
+        if engine == "offline":
+            contract, processed_items, meta = process_question_item(
+                raw_text=raw_text,
+                question_id=qid,
+                domain=domain,
+                config=config,
+                engine="offline"
+            )
+        else:
+            contract, processed_items, meta = detector.detect_and_process(
+                raw_text=raw_text,
+                question_id=qid,
+                domain=domain,
+                config=config
+            )
 
         contracts.append(contract)
         results.extend(processed_items)
@@ -108,12 +146,15 @@ def review_questions(
     split_screens = sum(1 for r in results if r["after"]["layout"] == "split_screen_with_reference")
     single_columns = sum(1 for r in results if r["after"]["layout"] == "single_column_stem_only")
 
+    method_desc = (
+        f"Live AI Boundary Detection with Verbatim Python Slicing. Engine: {detector.model_name}."
+        if detector
+        else "Autonomous Semantic Parser (Offline) with Verbatim Python Slicing."
+    )
+
     payload = {
         "title": "Medical Assessment Stem Isolation - Reviewer Output",
-        "method": (
-            "Live AI Boundary Detection with Verbatim Python Slicing. "
-            f"Engine: {detector.model_name}."
-        ),
+        "method": method_desc,
         "summary": {
             "total_items": total_items,
             "passed_items": passed_items,

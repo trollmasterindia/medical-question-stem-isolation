@@ -1,0 +1,4312 @@
+{
+  "title": "Medical Assessment Stem Isolation - Reviewer Output",
+  "method": "AI Boundary Detection with Verbatim Python Slicing (Zero Text Loss). Execution Mode: BENCHMARK.",
+  "summary": {
+    "total_items": 46,
+    "exact_text_preservation_rate": "100%",
+    "all_stems_under_500_chars": true,
+    "average_stem_length": 77.9,
+    "split_screen_count": 36,
+    "single_column_count": 10
+  },
+  "questions": [
+    {
+      "before": {
+        "stem": "1. You are a nursing student observing care in the Critical Care Unit (CCU) as part of your clinical course. You have been assisting a critical care nurse with the care of a client who has been experiencing significantly low blood pressures throughout the day. The nurse has to step away from the bedside to take a phone call and instructs you to increase the intravenous (IV) medication if the client’s systolic blood pressure drops below 90 mmHg. What is the appropriate response to this instruction?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 502,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the appropriate response to this instruction?",
+        "reference": "You are a nursing student observing care in the Critical Care Unit (CCU) as part of your clinical course. You have been assisting a critical care nurse with the care of a client who has been experiencing significantly low blood pressures throughout the day. The nurse has to step away from the bedside to take a phone call and instructs you to increase the intravenous (IV) medication if the client’s systolic blood pressure drops below 90 mmHg.",
+        "distractors": [],
+        "metadata": "1.",
+        "stem_char_count": 53,
+        "reference_char_count": 445,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            449,
+            502
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q001",
+      "domain": "nursing"
+    },
+    {
+      "before": {
+        "stem": "A young adult presents to the urgent care with a right knee injury. The injury occurred during a basketball game. The nurse begins to perform a musculoskeletal assessment. What is the first step of the assessment?\n\nPalpation\nInspection\nPercussion\nAuscultation",
+        "reference": null,
+        "distractors": [],
+        "char_count": 259,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the first step of the assessment?",
+        "reference": "A young adult presents to the urgent care with a right knee injury. The injury occurred during a basketball game. The nurse begins to perform a musculoskeletal assessment.",
+        "distractors": [
+          "Palpation",
+          "Inspection",
+          "Percussion",
+          "Auscultation"
+        ],
+        "metadata": null,
+        "stem_char_count": 41,
+        "reference_char_count": 171,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            172,
+            213
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q043",
+      "domain": "clinical nursing assessment"
+    },
+    {
+      "before": {
+        "stem": "What are the steps the nurse should follow if the medication is given to the wrong patient?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 91,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What are the steps the nurse should follow if the medication is given to the wrong patient?",
+        "reference": null,
+        "distractors": [],
+        "metadata": null,
+        "stem_char_count": 91,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            0,
+            91
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q051",
+      "domain": "clinical nursing assessment"
+    },
+    {
+      "before": {
+        "stem": "The primary support for the glenohumeral joint is provided by the ________.\n\ncoracohumeral ligament\nglenoid labrum\nrotator cuff muscles\nsubacromial bursa",
+        "reference": null,
+        "distractors": [],
+        "char_count": 153,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "The primary support for the glenohumeral joint is provided by the ________.",
+        "reference": null,
+        "distractors": [
+          "coracohumeral ligament",
+          "glenoid labrum",
+          "rotator cuff muscles",
+          "subacromial bursa"
+        ],
+        "metadata": null,
+        "stem_char_count": 75,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            0,
+            75
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q057",
+      "domain": "anatomy / rehabilitation foundations"
+    },
+    {
+      "before": {
+        "stem": "Your 82-year-old postoperative client is hard to rouse 30 minutes after you administered IV morphine. Their BP is 102/72, respirations are 8 and shallow and SpO2 is 88% on room air. Which of the following (with health care provider orders) are priority nursing actions? Select all that apply.\na) Administer oxygen\nb) Administer naloxone\nc) Insert a foley catheter\nd) Increase IV fluid rate\ne) Raise the head of the bed",
+        "reference": null,
+        "distractors": [],
+        "char_count": 418,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Which of the following (with health care provider orders) are priority nursing actions? Select all that apply.",
+        "reference": "Your 82-year-old postoperative client is hard to rouse 30 minutes after you administered IV morphine. Their BP is 102/72, respirations are 8 and shallow and SpO2 is 88% on room air.",
+        "distractors": [
+          "a) Administer oxygen\nb) Administer naloxone\nc) Insert a foley catheter\nd) Increase IV fluid rate\ne) Raise the head of the bed"
+        ],
+        "metadata": null,
+        "stem_char_count": 110,
+        "reference_char_count": 181,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            182,
+            292
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q004",
+      "domain": "Nursing"
+    },
+    {
+      "before": {
+        "stem": "A physician has ordered nafcillin 750 mg IM q 6 h. On hand is a 2-gram vial that states: “Add 6.8 mL of sterile water to provide a total solution of 8 mL.” How many milliliters should the nurse draw up to give the patient the ordered dose?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 239,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "How many milliliters should the nurse draw up to give the patient the ordered dose?",
+        "reference": "A physician has ordered nafcillin 750 mg IM q 6 h. On hand is a 2-gram vial that states: “Add 6.8 mL of sterile water to provide a total solution of 8 mL.”",
+        "distractors": [],
+        "metadata": null,
+        "stem_char_count": 83,
+        "reference_char_count": 155,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            156,
+            239
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q050",
+      "domain": "clinical nursing assessment"
+    },
+    {
+      "before": {
+        "stem": "As you walk into your patient’s room, you notice the patient appears to be short of breath. Your patient states “I have been short of breath and tired for the past week.” Upon assessment of your patient, you notice JVD, labored breathing, lung sounds with crackles in the posterior bases, and +2 edema to the lower extremities bilaterally.\n\nFrom your assessment findings, determine the most likely disease state that is being described.\n\nHypertension\nPulmonary Embolism\nHeart Failure\nStroke",
+        "reference": null,
+        "distractors": [],
+        "char_count": 490,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "From your assessment findings, determine the most likely disease state that is being described.",
+        "reference": "As you walk into your patient’s room, you notice the patient appears to be short of breath. Your patient states “I have been short of breath and tired for the past week.” Upon assessment of your patient, you notice JVD, labored breathing, lung sounds with crackles in the posterior bases, and +2 edema to the lower extremities bilaterally.",
+        "distractors": [
+          "Hypertension",
+          "Pulmonary Embolism",
+          "Heart Failure",
+          "Stroke"
+        ],
+        "metadata": null,
+        "stem_char_count": 95,
+        "reference_char_count": 339,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            341,
+            436
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q052",
+      "domain": "clinical nursing assessment"
+    },
+    {
+      "before": {
+        "stem": "A patient responds to the question “What is your name?” with a look of incomprehension. Which of the two major language areas is most likely affected and what is the name for that type of aphasia?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 196,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Which of the two major language areas is most likely affected and what is the name for that type of aphasia?",
+        "reference": "A patient responds to the question “What is your name?” with a look of incomprehension.",
+        "distractors": [],
+        "metadata": null,
+        "stem_char_count": 108,
+        "reference_char_count": 87,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            88,
+            196
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q056",
+      "domain": "anatomy / rehabilitation foundations"
+    },
+    {
+      "before": {
+        "stem": "Which of the following is not a cause of cerebellar ataxia?\n\nmercury from fish\ndrinking alcohol\nantibiotics\nhereditary degeneration of the cerebellum",
+        "reference": null,
+        "distractors": [],
+        "char_count": 149,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Which of the following is not a cause of cerebellar ataxia?",
+        "reference": null,
+        "distractors": [
+          "mercury from fish",
+          "drinking alcohol",
+          "antibiotics",
+          "hereditary degeneration of the cerebellum"
+        ],
+        "metadata": null,
+        "stem_char_count": 59,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            0,
+            59
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q065",
+      "domain": "anatomy / rehabilitation foundations"
+    },
+    {
+      "before": {
+        "stem": "4. A patient has 500 mL of 0.9% normal saline ordered to infuse over three hours. The IV tubing has a 15 drop per milliliter factor.\n\nHow many drops per minute will the nurse infuse the IV fluids? (Round final answer to the nearest whole number)?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 246,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "How many drops per minute will the nurse infuse the IV fluids? (Round final answer to the nearest whole number)?",
+        "reference": "A patient has 500 mL of 0.9% normal saline ordered to infuse over three hours. The IV tubing has a 15 drop per milliliter factor.",
+        "distractors": [],
+        "metadata": "4.",
+        "stem_char_count": 112,
+        "reference_char_count": 129,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            134,
+            246
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q071",
+      "domain": "Nursing dosage calculations"
+    },
+    {
+      "before": {
+        "stem": "Exercise 2.2\n\nAt an influenza immunization clinic at a retirement community, residents were asked in how many previous years they had received influenza vaccine. The answers from the first 19 residents are listed below. Organize these data into a frequency distribution.\n\n2, 0, 3, 1, 0, 1, 2, 2, 4, 8, 1, 3, 3, 12, 1, 6, 2, 5, 1",
+        "reference": null,
+        "distractors": [],
+        "char_count": 328,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Organize these data into a frequency distribution.",
+        "reference": "At an influenza immunization clinic at a retirement community, residents were asked in how many previous years they had received influenza vaccine. The answers from the first 19 residents are listed below.\n\n2, 0, 3, 1, 0, 1, 2, 2, 4, 8, 1, 3, 3, 12, 1, 6, 2, 5, 1",
+        "distractors": [],
+        "metadata": "Exercise 2.2",
+        "stem_char_count": 50,
+        "reference_char_count": 263,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            220,
+            270
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q091",
+      "domain": "Public health / epidemiology"
+    },
+    {
+      "before": {
+        "stem": "8. Investigators enrolled 100 diabetics without eye disease in a cohort (follow-up) study. The results of the first 3 years were as follows:\nYear 1: 0 cases of eye disease detected out of 92; 8 lost to follow-up\nYear 2: 2 new cases of eye disease detected out of 80; 2 had died; 10 lost to follow-up\nYear 3: 3 new cases of eye disease detected out of 63; 2 more had died; 13 more lost to follow-up\nThe person-time incidence rate is calculated as:\nA. 5 ⁄ 100\nB. 5 ⁄ 63\nC. 5 ⁄ 235\nD. 5 ⁄ 250",
+        "reference": null,
+        "distractors": [],
+        "char_count": 489,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "The person-time incidence rate is calculated as:",
+        "reference": "Investigators enrolled 100 diabetics without eye disease in a cohort (follow-up) study. The results of the first 3 years were as follows:\nYear 1: 0 cases of eye disease detected out of 92; 8 lost to follow-up\nYear 2: 2 new cases of eye disease detected out of 80; 2 had died; 10 lost to follow-up\nYear 3: 3 new cases of eye disease detected out of 63; 2 more had died; 13 more lost to follow-up",
+        "distractors": [
+          "A. 5 ⁄ 100\nB. 5 ⁄ 63\nC. 5 ⁄ 235\nD. 5 ⁄ 250"
+        ],
+        "metadata": "8.",
+        "stem_char_count": 48,
+        "reference_char_count": 394,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            398,
+            446
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q098",
+      "domain": "Public health / epidemiology"
+    },
+    {
+      "before": {
+        "stem": "2. Which of the following transdermal medication administration actions are correct? (Select all that apply).\na. The nurse may apply heat to all medication patches to help aid absorption of the medication.\nb. When placing a patch, the nurse should press the patch firmly to the skin to ensure adequate adherence.\nc. Gloves are required for patch application and removal.\nd. Transdermal patches may be placed directly into the trash.\ne. Date and location of patch application should be promptly documented in the medication administration record (MAR).",
+        "reference": null,
+        "distractors": [],
+        "char_count": 551,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Which of the following transdermal medication administration actions are correct? (Select all that apply).",
+        "reference": null,
+        "distractors": [
+          "a. The nurse may apply heat to all medication patches to help aid absorption of the medication.\nb. When placing a patch, the nurse should press the patch firmly to the skin to ensure adequate adherence.\nc. Gloves are required for patch application and removal.\nd. Transdermal patches may be placed directly into the trash.\ne. Date and location of patch application should be promptly documented in the medication administration record (MAR)."
+        ],
+        "metadata": "2.",
+        "stem_char_count": 106,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            3,
+            109
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q002",
+      "domain": "Nursing"
+    },
+    {
+      "before": {
+        "stem": "Mr. Smith, a 60-year-old male, was admitted to the general medical floor with a diagnosis of an exacerbation of heart failure. See Figure 15.17 for an image of Mr. Smith.[1] He has a past medical history of hypertension and coronary artery disease. His admitting weight was 225 pounds. His baseline weight from a previous clinic visit was 210 pounds. On admission, he had fine crackles throughout his lower posterior lobes and 4+ pitting edema in his lower extremities. His ABG results on admission were pH 7.30, PaCO2 50 mmHg, PaO2 80 mm Hg, HCO3- 27 mEq/L, and SaO2 85%.\n\nMr. Smith has received multiple doses of IV diuretics over the past three days since admission. During your morning assessment, Mr. Smith tells you he very thirsty and feels dizzy. You notice he is irritable and is becoming increasingly confused. You quickly obtain his vital signs: BP 85/45, HR 110, RR 24/minute, O2 saturation 98% on 2L/min per nasal cannula, and temperature 37.2 degrees Celsius. His lung sounds are clear, and his heart sounds are regular sinus rhythm. You notice his weight this morning was 205 pounds. You call the provider and receive orders for STAT basic metabolic panel and to initiate 0.9% Normal Saline IV fluids at 250 mL/hour until the provider arrives to evaluate the client.\n\nThe basic metabolic panel results (with the lab’s normal reference range in parentheses) are as follows:\n\nSodium: 155 mEq/L (135-145)\n\nPotassium: 3.3 mEq/L (3.5-5.3)\n\nChloride: 103 mEq/L (98-108)\n\nCarbon dioxide: 25 mEq/L (23-27)\n\nBlood urea nitrogen (BUN): 30 mg/dL (10-25)\n\nCreatinine: 1.9 mg/dL (0.5-1.5)\n\nGlucose: 100 mg/dL (fasting 70-99)\n\n4. What is Mr. Smith’s fluid balance this morning? Support your answer with data.",
+        "reference": null,
+        "distractors": [],
+        "char_count": 1709,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is Mr. Smith’s fluid balance this morning? Support your answer with data.",
+        "reference": "Mr. Smith, a 60-year-old male, was admitted to the general medical floor with a diagnosis of an exacerbation of heart failure. See Figure 15.17 for an image of Mr. Smith.[1] He has a past medical history of hypertension and coronary artery disease. His admitting weight was 225 pounds. His baseline weight from a previous clinic visit was 210 pounds. On admission, he had fine crackles throughout his lower posterior lobes and 4+ pitting edema in his lower extremities. His ABG results on admission were pH 7.30, PaCO2 50 mmHg, PaO2 80 mm Hg, HCO3- 27 mEq/L, and SaO2 85%.\n\nMr. Smith has received multiple doses of IV diuretics over the past three days since admission. During your morning assessment, Mr. Smith tells you he very thirsty and feels dizzy. You notice he is irritable and is becoming increasingly confused. You quickly obtain his vital signs: BP 85/45, HR 110, RR 24/minute, O2 saturation 98% on 2L/min per nasal cannula, and temperature 37.2 degrees Celsius. His lung sounds are clear, and his heart sounds are regular sinus rhythm. You notice his weight this morning was 205 pounds. You call the provider and receive orders for STAT basic metabolic panel and to initiate 0.9% Normal Saline IV fluids at 250 mL/hour until the provider arrives to evaluate the client.\n\nThe basic metabolic panel results (with the lab’s normal reference range in parentheses) are as follows:\n\nSodium: 155 mEq/L (135-145)\n\nPotassium: 3.3 mEq/L (3.5-5.3)\n\nChloride: 103 mEq/L (98-108)\n\nCarbon dioxide: 25 mEq/L (23-27)\n\nBlood urea nitrogen (BUN): 30 mg/dL (10-25)\n\nCreatinine: 1.9 mg/dL (0.5-1.5)\n\nGlucose: 100 mg/dL (fasting 70-99)",
+        "distractors": [],
+        "metadata": "4.",
+        "stem_char_count": 78,
+        "reference_char_count": 1626,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            1631,
+            1709
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q025",
+      "domain": "nursing"
+    },
+    {
+      "before": {
+        "stem": "A patient has pneumonia, which is currently being treated with antibiotics, and reports feeling better since being hospitalized. The nurse assesses the patients oxygen saturation using a pulse oximeter by placing the probe on the patient’s finger. The reading is 89%.\n\nWhich of the following actions should the nurse perform first?\n\nAssess the pulse oximeter probe site to ensure an accurate reading.\nAdminister oxygen and monitor the pulse oximetry until it reaches 95 percent.\nRaise the head of the bed and ask the patient to take several deep breaths.\nContact the provider and recommend prescribing a chest X-ray.",
+        "reference": null,
+        "distractors": [],
+        "char_count": 616,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Which of the following actions should the nurse perform first?",
+        "reference": "A patient has pneumonia, which is currently being treated with antibiotics, and reports feeling better since being hospitalized. The nurse assesses the patients oxygen saturation using a pulse oximeter by placing the probe on the patient’s finger. The reading is 89%.",
+        "distractors": [
+          "Assess the pulse oximeter probe site to ensure an accurate reading.",
+          "Administer oxygen and monitor the pulse oximetry until it reaches 95 percent.",
+          "Raise the head of the bed and ask the patient to take several deep breaths.",
+          "Contact the provider and recommend prescribing a chest X-ray."
+        ],
+        "metadata": null,
+        "stem_char_count": 62,
+        "reference_char_count": 267,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            269,
+            331
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q049",
+      "domain": "clinical nursing assessment"
+    },
+    {
+      "before": {
+        "stem": "3. If a particular outbreak presents an unusual opportunity to learn more about the disease and its epidemiology by conducting a study, but early disease control measures would interfere with the study, one should conduct the study quickly, then implement control measures immediately afterwards.\nA. True\nB. False",
+        "reference": null,
+        "distractors": [],
+        "char_count": 313,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "If a particular outbreak presents an unusual opportunity to learn more about the disease and its epidemiology by conducting a study, but early disease control measures would interfere with the study, one should conduct the study quickly, then implement control measures immediately afterwards.",
+        "reference": null,
+        "distractors": [
+          "A. True\nB. False"
+        ],
+        "metadata": "3.",
+        "stem_char_count": 293,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            3,
+            296
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q058",
+      "domain": "Public health / epidemiology"
+    },
+    {
+      "before": {
+        "stem": "Describe the sequence of injuries that may occur if the extended, weight-bearing knee receives a very strong blow to the lateral side of the knee.",
+        "reference": null,
+        "distractors": [],
+        "char_count": 146,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Describe the sequence of injuries that may occur if the extended, weight-bearing knee receives a very strong blow to the lateral side of the knee.",
+        "reference": null,
+        "distractors": [],
+        "metadata": null,
+        "stem_char_count": 146,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            0,
+            146
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q060",
+      "domain": "anatomy / rehabilitation foundations"
+    },
+    {
+      "before": {
+        "stem": "24. Given the area under a normal curve, which two of the following ranges are the same? (Circle the TWO that are the same.)\nA. From the 2.5th percentile to the 97.5th percentile\nB. From the 5th percentile to the 95th percentile\nC. From the 25th percentile to the 75th percentile\nD. From 1 standard deviation below the mean to 1 standard deviation above the mean\nE. From 1.96 standard deviations below the mean to 1.96 standard deviations above the mean",
+        "reference": null,
+        "distractors": [],
+        "char_count": 453,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Given the area under a normal curve, which two of the following ranges are the same? (Circle the TWO that are the same.)",
+        "reference": null,
+        "distractors": [
+          "A. From the 2.5th percentile to the 97.5th percentile\nB. From the 5th percentile to the 95th percentile\nC. From the 25th percentile to the 75th percentile\nD. From 1 standard deviation below the mean to 1 standard deviation above the mean\nE. From 1.96 standard deviations below the mean to 1.96 standard deviations above the mean"
+        ],
+        "metadata": "24.",
+        "stem_char_count": 120,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            4,
+            124
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q062",
+      "domain": "Public health / epidemiology"
+    },
+    {
+      "before": {
+        "stem": "9. Calculate the infusion time for an IV of 1000 mL D5W infusing at a rate of 125 mL/hr.",
+        "reference": null,
+        "distractors": [],
+        "char_count": 88,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Calculate the infusion time for an IV of 1000 mL D5W infusing at a rate of 125 mL/hr.",
+        "reference": null,
+        "distractors": [],
+        "metadata": "9.",
+        "stem_char_count": 85,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            3,
+            88
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q072",
+      "domain": "Nursing dosage calculations"
+    },
+    {
+      "before": {
+        "stem": "12. At 0600 you started an IV with 1000 mL D5 RL to infuse at 60 mL/hr.\n\nWhat time will the infusion be complete? Answer in military time.",
+        "reference": null,
+        "distractors": [],
+        "char_count": 138,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What time will the infusion be complete? Answer in military time.",
+        "reference": "At 0600 you started an IV with 1000 mL D5 RL to infuse at 60 mL/hr.",
+        "distractors": [],
+        "metadata": "12.",
+        "stem_char_count": 65,
+        "reference_char_count": 67,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            73,
+            138
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q075",
+      "domain": "Nursing dosage calculations"
+    },
+    {
+      "before": {
+        "stem": "14. If an IV is to be running at 75 mL/hr,\n\nHow many gtt/min should it be running at if the nurse is using microdrip tubing (60 gtt/mL) (Round to the nearest whole number)?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 172,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "If an IV is to be running at 75 mL/hr,\n\nHow many gtt/min should it be running at if the nurse is using microdrip tubing (60 gtt/mL) (Round to the nearest whole number)?",
+        "reference": null,
+        "distractors": [],
+        "metadata": "14.",
+        "stem_char_count": 168,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            4,
+            172
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q076",
+      "domain": "Nursing dosage calculations"
+    },
+    {
+      "before": {
+        "stem": "5. Order: 300 mg IM q6h. Label states: This vial contains Oxacillin sodium monohydrate equivalent to 2 grams Oxacillin and 40 mg Dibasic sodium phosphate.\n\nFor IM use, add 11.5 mL sterile water for injection, USP. Each 1.5 mL of solution contains 250 mg oxacillin.\n\nHow many mL should be administered (Round to the nearest hundredth)?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 334,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "How many mL should be administered (Round to the nearest hundredth)?",
+        "reference": "Order: 300 mg IM q6h. Label states: This vial contains Oxacillin sodium monohydrate equivalent to 2 grams Oxacillin and 40 mg Dibasic sodium phosphate.\n\nFor IM use, add 11.5 mL sterile water for injection, USP. Each 1.5 mL of solution contains 250 mg oxacillin.",
+        "distractors": [],
+        "metadata": "5.",
+        "stem_char_count": 68,
+        "reference_char_count": 261,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            266,
+            334
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q089",
+      "domain": "Nursing dosage calculations"
+    },
+    {
+      "before": {
+        "stem": "7. Order: Biaxin 15 mg/kg for a child who weighs 45 lb.\n\nLabel states: Measure 55 mL of water using a graduated cylinder. Add half the volume of water to the bottle and shake vigorously. Add the remainder of water to the bottle; shake to yield 125 mg per 5 mL.\n\nHow many mL should be administered (Round to the nearest hundredth)?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 330,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "How many mL should be administered (Round to the nearest hundredth)?",
+        "reference": "Order: Biaxin 15 mg/kg for a child who weighs 45 lb.\n\nLabel states: Measure 55 mL of water using a graduated cylinder. Add half the volume of water to the bottle and shake vigorously. Add the remainder of water to the bottle; shake to yield 125 mg per 5 mL.",
+        "distractors": [],
+        "metadata": "7.",
+        "stem_char_count": 68,
+        "reference_char_count": 257,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            262,
+            330
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q090",
+      "domain": "Nursing dosage calculations"
+    },
+    {
+      "before": {
+        "stem": "13. A physician working in an emergency room in Town A, USA, has just examined a tourist from Southeast Asia with watery diarrhea. The physician suspects the man might have cholera. The physician should notify the …\nA. Local (town or county) health agency.\nB. State health department.\nC. Centers for Disease Control and Prevention (CDC).\nD. U.S. Department of State.\nE. Washington, D.C., embassy of country of origin (ask for health attaché).",
+        "reference": null,
+        "distractors": [],
+        "char_count": 442,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "The physician should notify the …",
+        "reference": "A physician working in an emergency room in Town A, USA, has just examined a tourist from Southeast Asia with watery diarrhea. The physician suspects the man might have cholera.",
+        "distractors": [
+          "A. Local (town or county) health agency.\nB. State health department.\nC. Centers for Disease Control and Prevention (CDC).\nD. U.S. Department of State.\nE. Washington, D.C., embassy of country of origin (ask for health attaché)."
+        ],
+        "metadata": "13.",
+        "stem_char_count": 33,
+        "reference_char_count": 177,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            182,
+            215
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q099",
+      "domain": "Public health / epidemiology"
+    },
+    {
+      "before": {
+        "stem": "2. Consider the following scenario and describe actions that you might take to facilitate the communication experience.\n\nYou are caring for Mr. Curtis, an 87-year-old client newly admitted to the medical surgical floor with a hip fracture. You are preparing to complete his admission history and need to collect relevant health information and complete a physical exam. You approach the room, knock at the door, complete hand hygiene, and enter. Upon entry, you see Mr. Curtis is in bed surrounded by multiple family members. The television is on in the background, and you also note the sound of meal trays being delivered in the hallway.\n\nBased on the described scenario, what actions might be implemented to aid in your communication with Mr. Curtis?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 753,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Based on the described scenario, what actions might be implemented to aid in your communication with Mr. Curtis?",
+        "reference": "Consider the following scenario and describe actions that you might take to facilitate the communication experience.\n\nYou are caring for Mr. Curtis, an 87-year-old client newly admitted to the medical surgical floor with a hip fracture. You are preparing to complete his admission history and need to collect relevant health information and complete a physical exam. You approach the room, knock at the door, complete hand hygiene, and enter. Upon entry, you see Mr. Curtis is in bed surrounded by multiple family members. The television is on in the background, and you also note the sound of meal trays being delivered in the hallway.",
+        "distractors": [],
+        "metadata": "2.",
+        "stem_char_count": 112,
+        "reference_char_count": 636,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            641,
+            753
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q003",
+      "domain": "nursing"
+    },
+    {
+      "before": {
+        "stem": "Unless instructed otherwise, choose ALL correct answers for each question.\n1. In the definition of epidemiology, “distribution” refers to:\nA. Who\nB. When\nC. Where\nD. Why",
+        "reference": null,
+        "distractors": [],
+        "char_count": 169,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Unless instructed otherwise, choose ALL correct answers for each question.\n\nIn the definition of epidemiology, “distribution” refers to:",
+        "reference": null,
+        "distractors": [
+          "A. Who\nB. When\nC. Where\nD. Why"
+        ],
+        "metadata": "1.",
+        "stem_char_count": 136,
+        "reference_char_count": 0,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only",
+        "is_discontiguous": true
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            0,
+            74
+          ],
+          [
+            78,
+            138
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q063",
+      "domain": "Public health / epidemiology"
+    },
+    {
+      "before": {
+        "stem": "5. Use the following steps of an outbreak investigation for Question 5:\n1. Analyze data by time, place, and person\n2. Conduct a case-control study\n3. Generate hypotheses\n4. Conduct active surveillance for additional cases\n5. Verify the diagnosis\n6. Confirm that the number of cases exceeds the expected number\n7. Talk with laboratorians about specimen collection\nFor an investigation of an outbreak, what is the logical conceptual order of the steps listed above?\nA. 1-2-3-4-5-6-7\nB. 5-6-4-1-2-3-7\nC. 6-5-3-1-2-7-4\nD. 6-5-7-4-1-3-2",
+        "reference": null,
+        "distractors": [],
+        "char_count": 531,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "For an investigation of an outbreak, what is the logical conceptual order of the steps listed above?",
+        "reference": "Use the following steps of an outbreak investigation for Question 5:\n\n1. Analyze data by time, place, and person\n2. Conduct a case-control study\n3. Generate hypotheses\n4. Conduct active surveillance for additional cases\n5. Verify the diagnosis\n6. Confirm that the number of cases exceeds the expected number\n7. Talk with laboratorians about specimen collection",
+        "distractors": [
+          "A. 1-2-3-4-5-6-7\nB. 5-6-4-1-2-3-7\nC. 6-5-3-1-2-7-4\nD. 6-5-7-4-1-3-2"
+        ],
+        "metadata": "5.",
+        "stem_char_count": 100,
+        "reference_char_count": 360,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference",
+        "is_discontiguous": false
+      },
+      "verification": {
+        "stem_spans": [
+          [
+            363,
+            463
+          ]
+        ],
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      },
+      "id": "Q095",
+      "domain": "Public health / epidemiology"
+    },
+    {
+      "id": "Q080-a",
+      "parent_id": "Q080",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "1. The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.\n\na. What is the recommended safe range in mg/dose for this child when dosed q8h?\n\nb. Is the prescribed dosage within the recommended range for impetigo?\n\nc. What is the range in mL/dose for this child?\n\nd. How many mL/dose would the child receive for the prescribed dosage?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 584,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the recommended safe range in mg/dose for this child when dosed q8h?",
+        "reference": "The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.",
+        "distractors": [],
+        "metadata": "Q080 (Part A)",
+        "stem_char_count": 76,
+        "reference_char_count": 307,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q080-b",
+      "parent_id": "Q080",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "1. The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.\n\na. What is the recommended safe range in mg/dose for this child when dosed q8h?\n\nb. Is the prescribed dosage within the recommended range for impetigo?\n\nc. What is the range in mL/dose for this child?\n\nd. How many mL/dose would the child receive for the prescribed dosage?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 584,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Is the prescribed dosage within the recommended range for impetigo?",
+        "reference": "The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.",
+        "distractors": [],
+        "metadata": "Q080 (Part B)",
+        "stem_char_count": 67,
+        "reference_char_count": 307,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q080-c",
+      "parent_id": "Q080",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "1. The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.\n\na. What is the recommended safe range in mg/dose for this child when dosed q8h?\n\nb. Is the prescribed dosage within the recommended range for impetigo?\n\nc. What is the range in mL/dose for this child?\n\nd. How many mL/dose would the child receive for the prescribed dosage?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 584,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the range in mL/dose for this child?",
+        "reference": "The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.",
+        "distractors": [],
+        "metadata": "Q080 (Part C)",
+        "stem_char_count": 44,
+        "reference_char_count": 307,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q080-d",
+      "parent_id": "Q080",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "1. The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.\n\na. What is the recommended safe range in mg/dose for this child when dosed q8h?\n\nb. Is the prescribed dosage within the recommended range for impetigo?\n\nc. What is the range in mL/dose for this child?\n\nd. How many mL/dose would the child receive for the prescribed dosage?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 584,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "How many mL/dose would the child receive for the prescribed dosage?",
+        "reference": "The recommended dosage of Cephalexin to treat impetigo in infants, children, and adolescents is 25 to 50 mg/kg/day divided every 6 to 8 hours (with a maximum dose of 250 mg/dose) for at least seven days. A 23-pound child has been prescribed 100 mg PO q8h for seven days. The drug is available as 250 mg/5mL.",
+        "distractors": [],
+        "metadata": "Q080 (Part D)",
+        "stem_char_count": 67,
+        "reference_char_count": 307,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q082-a",
+      "parent_id": "Q082",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "3. The recommended oral dosage for a medication is 5mg/kg/day divided into 3-4 doses when treating allergies in infants, children, and adolescents. A 46-pound-male child has been prescribed 25 mg PO q6h. The medication is available as an oral solution containing 12.5 mg/5mL.\n\na. Is this a safe dosage for this child?\n\nb. How many mL/dose will this child receive?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 363,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Is this a safe dosage for this child?",
+        "reference": "The recommended oral dosage for a medication is 5mg/kg/day divided into 3-4 doses when treating allergies in infants, children, and adolescents. A 46-pound-male child has been prescribed 25 mg PO q6h. The medication is available as an oral solution containing 12.5 mg/5mL.",
+        "distractors": [],
+        "metadata": "Q082 (Part A)",
+        "stem_char_count": 37,
+        "reference_char_count": 272,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q082-b",
+      "parent_id": "Q082",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "3. The recommended oral dosage for a medication is 5mg/kg/day divided into 3-4 doses when treating allergies in infants, children, and adolescents. A 46-pound-male child has been prescribed 25 mg PO q6h. The medication is available as an oral solution containing 12.5 mg/5mL.\n\na. Is this a safe dosage for this child?\n\nb. How many mL/dose will this child receive?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 363,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "How many mL/dose will this child receive?",
+        "reference": "The recommended oral dosage for a medication is 5mg/kg/day divided into 3-4 doses when treating allergies in infants, children, and adolescents. A 46-pound-male child has been prescribed 25 mg PO q6h. The medication is available as an oral solution containing 12.5 mg/5mL.",
+        "distractors": [],
+        "metadata": "Q082 (Part B)",
+        "stem_char_count": 41,
+        "reference_char_count": 272,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q073-1",
+      "parent_id": "Q073",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "10. An IV of 500 mL NS is to infuse at 60 mL/hr.\n\nWhat is the infusion time in hours?\n\nThe IV was started at 10:00 PM. When would the IV infusion be completed in military time?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 176,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the infusion time in hours?",
+        "reference": "An IV of 500 mL NS is to infuse at 60 mL/hr.",
+        "distractors": [],
+        "metadata": "Q073 (Part 1)",
+        "stem_char_count": 35,
+        "reference_char_count": 44,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q073-2",
+      "parent_id": "Q073",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "10. An IV of 500 mL NS is to infuse at 60 mL/hr.\n\nWhat is the infusion time in hours?\n\nThe IV was started at 10:00 PM. When would the IV infusion be completed in military time?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 176,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "When would the IV infusion be completed in military time?",
+        "reference": "An IV of 500 mL NS is to infuse at 60 mL/hr.\n\nThe IV was started at 10:00 PM.",
+        "distractors": [],
+        "metadata": "Q073 (Part 2)",
+        "stem_char_count": 57,
+        "reference_char_count": 77,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q074-1",
+      "parent_id": "Q074",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "11. An IV of 250 mL D5W is to infuse at 80 mL/hr.\n\nWhat is the infusion time in hours? The IV started at 2:00 AM.\n\nWhen would the IV infusion be completed in military time?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 172,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the infusion time in hours?",
+        "reference": "An IV of 250 mL D5W is to infuse at 80 mL/hr.",
+        "distractors": [],
+        "metadata": "Q074 (Part 1)",
+        "stem_char_count": 35,
+        "reference_char_count": 45,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q074-2",
+      "parent_id": "Q074",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "11. An IV of 250 mL D5W is to infuse at 80 mL/hr.\n\nWhat is the infusion time in hours? The IV started at 2:00 AM.\n\nWhen would the IV infusion be completed in military time?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 172,
+        "fits_500_char_limit": true,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "When would the IV infusion be completed in military time?",
+        "reference": "An IV of 250 mL D5W is to infuse at 80 mL/hr.\n\nThe IV started at 2:00 AM.",
+        "distractors": [],
+        "metadata": "Q074 (Part 2)",
+        "stem_char_count": 57,
+        "reference_char_count": 73,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q084-a",
+      "parent_id": "Q084",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "5. The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.\n\na. What is the safe mg/dose range for a child weighing 23 kilograms?\n\nb. What is the normal mL/dose range using the 2 mg/mL solution for a child weighing 23 pounds?\n\nc. The physician ordered 2 mL/dose of the 4 mg/mL solution for a patient who weighs 17 kilograms. Is this dose within the safe guidelines?\n\nd. The physician has ordered 3.9 mL of the 4 mg/mL solution for a child who weighs 14 kilograms. Is this dose within the safe guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 700,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the safe mg/dose range for a child weighing 23 kilograms?",
+        "reference": "The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.",
+        "distractors": [],
+        "metadata": "Q084 (Part A)",
+        "stem_char_count": 65,
+        "reference_char_count": 252,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q084-b",
+      "parent_id": "Q084",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "5. The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.\n\na. What is the safe mg/dose range for a child weighing 23 kilograms?\n\nb. What is the normal mL/dose range using the 2 mg/mL solution for a child weighing 23 pounds?\n\nc. The physician ordered 2 mL/dose of the 4 mg/mL solution for a patient who weighs 17 kilograms. Is this dose within the safe guidelines?\n\nd. The physician has ordered 3.9 mL of the 4 mg/mL solution for a child who weighs 14 kilograms. Is this dose within the safe guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 700,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the normal mL/dose range using the 2 mg/mL solution for a child weighing 23 pounds?",
+        "reference": "The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.",
+        "distractors": [],
+        "metadata": "Q084 (Part B)",
+        "stem_char_count": 91,
+        "reference_char_count": 252,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q084-c",
+      "parent_id": "Q084",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "5. The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.\n\na. What is the safe mg/dose range for a child weighing 23 kilograms?\n\nb. What is the normal mL/dose range using the 2 mg/mL solution for a child weighing 23 pounds?\n\nc. The physician ordered 2 mL/dose of the 4 mg/mL solution for a patient who weighs 17 kilograms. Is this dose within the safe guidelines?\n\nd. The physician has ordered 3.9 mL of the 4 mg/mL solution for a child who weighs 14 kilograms. Is this dose within the safe guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 700,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Is this dose within the safe guidelines?",
+        "reference": "The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.\n\nc. The physician ordered 2 mL/dose of the 4 mg/mL solution for a patient who weighs 17 kilograms.",
+        "distractors": [],
+        "metadata": "Q084 (Part C)",
+        "stem_char_count": 40,
+        "reference_char_count": 351,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q084-d",
+      "parent_id": "Q084",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "5. The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.\n\na. What is the safe mg/dose range for a child weighing 23 kilograms?\n\nb. What is the normal mL/dose range using the 2 mg/mL solution for a child weighing 23 pounds?\n\nc. The physician ordered 2 mL/dose of the 4 mg/mL solution for a patient who weighs 17 kilograms. Is this dose within the safe guidelines?\n\nd. The physician has ordered 3.9 mL of the 4 mg/mL solution for a child who weighs 14 kilograms. Is this dose within the safe guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 700,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Is this dose within the safe guidelines?",
+        "reference": "The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.\n\nd. The physician has ordered 3.9 mL of the 4 mg/mL solution for a child who weighs 14 kilograms.",
+        "distractors": [],
+        "metadata": "Q084 (Part D)",
+        "stem_char_count": 40,
+        "reference_char_count": 350,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q085-a",
+      "parent_id": "Q085",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "6. The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\na. What is the safe mg/dose range for a 63-pound child?\n\nb. What is the safe mg/day range for a 20-kilogram child?\n\nc. The health care provider ordered 700 mg IV q6j for a 50-pound child. Is this dosage within the safe general dosing guidelines?\n\nd. How many mg/kg/day will this child be receiving?\n\ne. A 32-kilogram child has been prescribed a dosage of 140 mg/kg/day divided every six hours. Does this dosage fall within the safe dosing guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 580,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the safe mg/dose range for a 63-pound child?",
+        "reference": "The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.",
+        "distractors": [],
+        "metadata": "Q085 (Part A)",
+        "stem_char_count": 52,
+        "reference_char_count": 125,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q085-b",
+      "parent_id": "Q085",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "6. The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\na. What is the safe mg/dose range for a 63-pound child?\n\nb. What is the safe mg/day range for a 20-kilogram child?\n\nc. The health care provider ordered 700 mg IV q6j for a 50-pound child. Is this dosage within the safe general dosing guidelines?\n\nd. How many mg/kg/day will this child be receiving?\n\ne. A 32-kilogram child has been prescribed a dosage of 140 mg/kg/day divided every six hours. Does this dosage fall within the safe dosing guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 580,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "What is the safe mg/day range for a 20-kilogram child?",
+        "reference": "The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.",
+        "distractors": [],
+        "metadata": "Q085 (Part B)",
+        "stem_char_count": 54,
+        "reference_char_count": 125,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q085-c",
+      "parent_id": "Q085",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "6. The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\na. What is the safe mg/dose range for a 63-pound child?\n\nb. What is the safe mg/day range for a 20-kilogram child?\n\nc. The health care provider ordered 700 mg IV q6j for a 50-pound child. Is this dosage within the safe general dosing guidelines?\n\nd. How many mg/kg/day will this child be receiving?\n\ne. A 32-kilogram child has been prescribed a dosage of 140 mg/kg/day divided every six hours. Does this dosage fall within the safe dosing guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 580,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Is this dosage within the safe general dosing guidelines?",
+        "reference": "The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\nc. The health care provider ordered 700 mg IV q6j for a 50-pound child.",
+        "distractors": [],
+        "metadata": "Q085 (Part C)",
+        "stem_char_count": 57,
+        "reference_char_count": 198,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q085-d",
+      "parent_id": "Q085",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "6. The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\na. What is the safe mg/dose range for a 63-pound child?\n\nb. What is the safe mg/day range for a 20-kilogram child?\n\nc. The health care provider ordered 700 mg IV q6j for a 50-pound child. Is this dosage within the safe general dosing guidelines?\n\nd. How many mg/kg/day will this child be receiving?\n\ne. A 32-kilogram child has been prescribed a dosage of 140 mg/kg/day divided every six hours. Does this dosage fall within the safe dosing guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 580,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "How many mg/kg/day will this child be receiving?",
+        "reference": "The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\nc. The health care provider ordered 700 mg IV q6j for a 50-pound child.",
+        "distractors": [],
+        "metadata": "Q085 (Part D)",
+        "stem_char_count": 48,
+        "reference_char_count": 198,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    },
+    {
+      "id": "Q085-e",
+      "parent_id": "Q085",
+      "domain": "Nursing dosage calculations",
+      "before": {
+        "stem": "6. The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\na. What is the safe mg/dose range for a 63-pound child?\n\nb. What is the safe mg/day range for a 20-kilogram child?\n\nc. The health care provider ordered 700 mg IV q6j for a 50-pound child. Is this dosage within the safe general dosing guidelines?\n\nd. How many mg/kg/day will this child be receiving?\n\ne. A 32-kilogram child has been prescribed a dosage of 140 mg/kg/day divided every six hours. Does this dosage fall within the safe dosing guidelines?",
+        "reference": null,
+        "distractors": [],
+        "char_count": 580,
+        "fits_500_char_limit": false,
+        "layout": "single_column_stem_only"
+      },
+      "after": {
+        "stem": "Does this dosage fall within the safe dosing guidelines?",
+        "reference": "The dosing guidelines for 1V Ampicillin is 100 to 150 mg/kg/day divided every six hours with a maximum daily dose of 4000 mg.\n\ne. A 32-kilogram child has been prescribed a dosage of 140 mg/kg/day divided every six hours.",
+        "distractors": [],
+        "metadata": "Q085 (Part E)",
+        "stem_char_count": 56,
+        "reference_char_count": 220,
+        "fits_500_char_limit": true,
+        "layout": "split_screen_with_reference"
+      },
+      "verification": {
+        "characters_added": 0,
+        "characters_removed": 0,
+        "exact_match": true,
+        "stem_under_500": true
+      }
+    }
+  ],
+  "master_contracts": [
+    {
+      "source_id": "Q001",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 448,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 448,
+          "end": 449,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 449,
+          "end": 502,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q001",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s004"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q043",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 171,
+          "kind": "reference"
+        },
+        {
+          "id": "s002",
+          "start": 171,
+          "end": 172,
+          "kind": "layout"
+        },
+        {
+          "id": "s003",
+          "start": 172,
+          "end": 259,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q043",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s003"
+          ],
+          "reference_segment_ids": [
+            "s001"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q051",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 91,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q051",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q057",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 153,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q057",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q004",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 181,
+          "kind": "reference"
+        },
+        {
+          "id": "s002",
+          "start": 181,
+          "end": 182,
+          "kind": "layout"
+        },
+        {
+          "id": "s003",
+          "start": 182,
+          "end": 292,
+          "kind": "stem"
+        },
+        {
+          "id": "s004",
+          "start": 292,
+          "end": 293,
+          "kind": "layout"
+        },
+        {
+          "id": "s005",
+          "start": 293,
+          "end": 313,
+          "kind": "option"
+        },
+        {
+          "id": "s006",
+          "start": 313,
+          "end": 314,
+          "kind": "layout"
+        },
+        {
+          "id": "s007",
+          "start": 314,
+          "end": 336,
+          "kind": "option"
+        },
+        {
+          "id": "s008",
+          "start": 336,
+          "end": 337,
+          "kind": "layout"
+        },
+        {
+          "id": "s009",
+          "start": 337,
+          "end": 363,
+          "kind": "option"
+        },
+        {
+          "id": "s010",
+          "start": 363,
+          "end": 364,
+          "kind": "layout"
+        },
+        {
+          "id": "s011",
+          "start": 364,
+          "end": 389,
+          "kind": "option"
+        },
+        {
+          "id": "s012",
+          "start": 389,
+          "end": 390,
+          "kind": "layout"
+        },
+        {
+          "id": "s013",
+          "start": 390,
+          "end": 418,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q004",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s003"
+          ],
+          "reference_segment_ids": [
+            "s001"
+          ],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s005"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s007"
+                  ]
+                },
+                {
+                  "id": "opt_3",
+                  "segment_ids": [
+                    "s009"
+                  ]
+                },
+                {
+                  "id": "opt_4",
+                  "segment_ids": [
+                    "s011"
+                  ]
+                },
+                {
+                  "id": "opt_5",
+                  "segment_ids": [
+                    "s013"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q050",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 239,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q050",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q052",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 490,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q052",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q056",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 87,
+          "kind": "reference"
+        },
+        {
+          "id": "s002",
+          "start": 87,
+          "end": 88,
+          "kind": "layout"
+        },
+        {
+          "id": "s003",
+          "start": 88,
+          "end": 196,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q056",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s003"
+          ],
+          "reference_segment_ids": [
+            "s001"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q065",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 149,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q065",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q071",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 196,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 196,
+          "end": 197,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 197,
+          "end": 246,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q071",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s004"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q091",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 328,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q091",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q098",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 446,
+          "kind": "stem"
+        },
+        {
+          "id": "s003",
+          "start": 446,
+          "end": 447,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 447,
+          "end": 457,
+          "kind": "option"
+        },
+        {
+          "id": "s005",
+          "start": 457,
+          "end": 458,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 458,
+          "end": 467,
+          "kind": "option"
+        },
+        {
+          "id": "s007",
+          "start": 467,
+          "end": 468,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 468,
+          "end": 478,
+          "kind": "option"
+        },
+        {
+          "id": "s009",
+          "start": 478,
+          "end": 479,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 479,
+          "end": 489,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q098",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s004"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s006"
+                  ]
+                },
+                {
+                  "id": "opt_3",
+                  "segment_ids": [
+                    "s008"
+                  ]
+                },
+                {
+                  "id": "opt_4",
+                  "segment_ids": [
+                    "s010"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q002",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 109,
+          "kind": "stem"
+        },
+        {
+          "id": "s003",
+          "start": 109,
+          "end": 110,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 110,
+          "end": 205,
+          "kind": "option"
+        },
+        {
+          "id": "s005",
+          "start": 205,
+          "end": 206,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 206,
+          "end": 312,
+          "kind": "option"
+        },
+        {
+          "id": "s007",
+          "start": 312,
+          "end": 313,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 313,
+          "end": 370,
+          "kind": "option"
+        },
+        {
+          "id": "s009",
+          "start": 370,
+          "end": 371,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 371,
+          "end": 432,
+          "kind": "option"
+        },
+        {
+          "id": "s011",
+          "start": 432,
+          "end": 433,
+          "kind": "layout"
+        },
+        {
+          "id": "s012",
+          "start": 433,
+          "end": 551,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q002",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s004"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s006"
+                  ]
+                },
+                {
+                  "id": "opt_3",
+                  "segment_ids": [
+                    "s008"
+                  ]
+                },
+                {
+                  "id": "opt_4",
+                  "segment_ids": [
+                    "s010"
+                  ]
+                },
+                {
+                  "id": "opt_5",
+                  "segment_ids": [
+                    "s012"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q025",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 1642,
+          "kind": "reference"
+        },
+        {
+          "id": "s002",
+          "start": 1642,
+          "end": 1643,
+          "kind": "layout"
+        },
+        {
+          "id": "s003",
+          "start": 1643,
+          "end": 1709,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q025",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s003"
+          ],
+          "reference_segment_ids": [
+            "s001"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q049",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 267,
+          "kind": "reference"
+        },
+        {
+          "id": "s002",
+          "start": 267,
+          "end": 269,
+          "kind": "layout"
+        },
+        {
+          "id": "s003",
+          "start": 269,
+          "end": 616,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q049",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s003"
+          ],
+          "reference_segment_ids": [
+            "s001"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q058",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 296,
+          "kind": "stem"
+        },
+        {
+          "id": "s003",
+          "start": 296,
+          "end": 297,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 297,
+          "end": 304,
+          "kind": "option"
+        },
+        {
+          "id": "s005",
+          "start": 304,
+          "end": 305,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 305,
+          "end": 313,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q058",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s004"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s006"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q060",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 146,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q060",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q062",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 4,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 4,
+          "end": 124,
+          "kind": "stem"
+        },
+        {
+          "id": "s003",
+          "start": 124,
+          "end": 125,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 125,
+          "end": 178,
+          "kind": "option"
+        },
+        {
+          "id": "s005",
+          "start": 178,
+          "end": 179,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 179,
+          "end": 228,
+          "kind": "option"
+        },
+        {
+          "id": "s007",
+          "start": 228,
+          "end": 229,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 229,
+          "end": 279,
+          "kind": "option"
+        },
+        {
+          "id": "s009",
+          "start": 279,
+          "end": 280,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 280,
+          "end": 362,
+          "kind": "option"
+        },
+        {
+          "id": "s011",
+          "start": 362,
+          "end": 363,
+          "kind": "layout"
+        },
+        {
+          "id": "s012",
+          "start": 363,
+          "end": 453,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q062",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s004"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s006"
+                  ]
+                },
+                {
+                  "id": "opt_3",
+                  "segment_ids": [
+                    "s008"
+                  ]
+                },
+                {
+                  "id": "opt_4",
+                  "segment_ids": [
+                    "s010"
+                  ]
+                },
+                {
+                  "id": "opt_5",
+                  "segment_ids": [
+                    "s012"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q072",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 88,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q072",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q075",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 4,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 4,
+          "end": 138,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q075",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q076",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 4,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 4,
+          "end": 172,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q076",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q089",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 264,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 264,
+          "end": 266,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 266,
+          "end": 334,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q089",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s004"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q090",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 260,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 260,
+          "end": 262,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 262,
+          "end": 330,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q090",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s004"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q099",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 4,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 4,
+          "end": 215,
+          "kind": "stem"
+        },
+        {
+          "id": "s003",
+          "start": 215,
+          "end": 216,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 216,
+          "end": 256,
+          "kind": "option"
+        },
+        {
+          "id": "s005",
+          "start": 256,
+          "end": 257,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 257,
+          "end": 284,
+          "kind": "option"
+        },
+        {
+          "id": "s007",
+          "start": 284,
+          "end": 285,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 285,
+          "end": 337,
+          "kind": "option"
+        },
+        {
+          "id": "s009",
+          "start": 337,
+          "end": 338,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 338,
+          "end": 366,
+          "kind": "option"
+        },
+        {
+          "id": "s011",
+          "start": 366,
+          "end": 367,
+          "kind": "layout"
+        },
+        {
+          "id": "s012",
+          "start": 367,
+          "end": 442,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q099",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s002"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s004"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s006"
+                  ]
+                },
+                {
+                  "id": "opt_3",
+                  "segment_ids": [
+                    "s008"
+                  ]
+                },
+                {
+                  "id": "opt_4",
+                  "segment_ids": [
+                    "s010"
+                  ]
+                },
+                {
+                  "id": "opt_5",
+                  "segment_ids": [
+                    "s012"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q003",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 119,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 119,
+          "end": 121,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 121,
+          "end": 745,
+          "kind": "reference"
+        },
+        {
+          "id": "s005",
+          "start": 745,
+          "end": 746,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 746,
+          "end": 753,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q003",
+          "parent_group_id": null,
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s006"
+          ],
+          "reference_segment_ids": [
+            "s002",
+            "s004"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q063",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 138,
+          "kind": "stem"
+        },
+        {
+          "id": "s002",
+          "start": 138,
+          "end": 139,
+          "kind": "layout"
+        },
+        {
+          "id": "s003",
+          "start": 139,
+          "end": 145,
+          "kind": "option"
+        },
+        {
+          "id": "s004",
+          "start": 145,
+          "end": 146,
+          "kind": "layout"
+        },
+        {
+          "id": "s005",
+          "start": 146,
+          "end": 153,
+          "kind": "option"
+        },
+        {
+          "id": "s006",
+          "start": 153,
+          "end": 154,
+          "kind": "layout"
+        },
+        {
+          "id": "s007",
+          "start": 154,
+          "end": 162,
+          "kind": "option"
+        },
+        {
+          "id": "s008",
+          "start": 162,
+          "end": 163,
+          "kind": "layout"
+        },
+        {
+          "id": "s009",
+          "start": 163,
+          "end": 169,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q063",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s001"
+          ],
+          "reference_segment_ids": [],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s003"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s005"
+                  ]
+                },
+                {
+                  "id": "opt_3",
+                  "segment_ids": [
+                    "s007"
+                  ]
+                },
+                {
+                  "id": "opt_4",
+                  "segment_ids": [
+                    "s009"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q095",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 312,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 312,
+          "end": 313,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 313,
+          "end": 463,
+          "kind": "stem"
+        },
+        {
+          "id": "s005",
+          "start": 463,
+          "end": 464,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 464,
+          "end": 480,
+          "kind": "option"
+        },
+        {
+          "id": "s007",
+          "start": 480,
+          "end": 481,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 481,
+          "end": 497,
+          "kind": "option"
+        },
+        {
+          "id": "s009",
+          "start": 497,
+          "end": 498,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 498,
+          "end": 514,
+          "kind": "option"
+        },
+        {
+          "id": "s011",
+          "start": 514,
+          "end": 515,
+          "kind": "layout"
+        },
+        {
+          "id": "s012",
+          "start": 515,
+          "end": 531,
+          "kind": "option"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q095",
+          "parent_group_id": null,
+          "response_kind": "single_choice",
+          "source_label_segment_ids": [
+            "s001"
+          ],
+          "stem_segment_ids": [
+            "s004"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [
+            {
+              "id": "og_1",
+              "kind": "choice_bank",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "segment_ids": [
+                    "s006"
+                  ]
+                },
+                {
+                  "id": "opt_2",
+                  "segment_ids": [
+                    "s008"
+                  ]
+                },
+                {
+                  "id": "opt_3",
+                  "segment_ids": [
+                    "s010"
+                  ]
+                },
+                {
+                  "id": "opt_4",
+                  "segment_ids": [
+                    "s012"
+                  ]
+                }
+              ]
+            }
+          ],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q080",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 310,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 310,
+          "end": 312,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 312,
+          "end": 314,
+          "kind": "metadata"
+        },
+        {
+          "id": "s005",
+          "start": 314,
+          "end": 315,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 315,
+          "end": 391,
+          "kind": "stem"
+        },
+        {
+          "id": "s007",
+          "start": 391,
+          "end": 393,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 393,
+          "end": 395,
+          "kind": "metadata"
+        },
+        {
+          "id": "s009",
+          "start": 395,
+          "end": 396,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 396,
+          "end": 463,
+          "kind": "stem"
+        },
+        {
+          "id": "s011",
+          "start": 463,
+          "end": 465,
+          "kind": "layout"
+        },
+        {
+          "id": "s012",
+          "start": 465,
+          "end": 467,
+          "kind": "metadata"
+        },
+        {
+          "id": "s013",
+          "start": 467,
+          "end": 468,
+          "kind": "layout"
+        },
+        {
+          "id": "s014",
+          "start": 468,
+          "end": 512,
+          "kind": "stem"
+        },
+        {
+          "id": "s015",
+          "start": 512,
+          "end": 514,
+          "kind": "layout"
+        },
+        {
+          "id": "s016",
+          "start": 514,
+          "end": 516,
+          "kind": "metadata"
+        },
+        {
+          "id": "s017",
+          "start": 516,
+          "end": 517,
+          "kind": "layout"
+        },
+        {
+          "id": "s018",
+          "start": 517,
+          "end": 584,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q080-a",
+          "parent_group_id": "group_Q080",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s004"
+          ],
+          "stem_segment_ids": [
+            "s006"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q080-b",
+          "parent_group_id": "group_Q080",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s008"
+          ],
+          "stem_segment_ids": [
+            "s010"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q080-c",
+          "parent_group_id": "group_Q080",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s012"
+          ],
+          "stem_segment_ids": [
+            "s014"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q080-d",
+          "parent_group_id": "group_Q080",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s016"
+          ],
+          "stem_segment_ids": [
+            "s018"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q082",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 275,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 275,
+          "end": 277,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 277,
+          "end": 279,
+          "kind": "metadata"
+        },
+        {
+          "id": "s005",
+          "start": 279,
+          "end": 280,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 280,
+          "end": 317,
+          "kind": "stem"
+        },
+        {
+          "id": "s007",
+          "start": 317,
+          "end": 319,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 319,
+          "end": 321,
+          "kind": "metadata"
+        },
+        {
+          "id": "s009",
+          "start": 321,
+          "end": 322,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 322,
+          "end": 363,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q082-a",
+          "parent_group_id": "group_Q082",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s004"
+          ],
+          "stem_segment_ids": [
+            "s006"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q082-b",
+          "parent_group_id": "group_Q082",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s008"
+          ],
+          "stem_segment_ids": [
+            "s010"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q073",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 4,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 4,
+          "end": 48,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 48,
+          "end": 50,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 50,
+          "end": 85,
+          "kind": "stem"
+        },
+        {
+          "id": "s005",
+          "start": 85,
+          "end": 87,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 87,
+          "end": 118,
+          "kind": "reference"
+        },
+        {
+          "id": "s007",
+          "start": 118,
+          "end": 119,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 119,
+          "end": 176,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q073-1",
+          "parent_group_id": "group_Q073",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s004"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q073-2",
+          "parent_group_id": "group_Q073",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s008"
+          ],
+          "reference_segment_ids": [
+            "s002",
+            "s006"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q074",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 4,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 4,
+          "end": 49,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 49,
+          "end": 51,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 51,
+          "end": 113,
+          "kind": "stem"
+        },
+        {
+          "id": "s005",
+          "start": 113,
+          "end": 115,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 115,
+          "end": 172,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q074-1",
+          "parent_group_id": "group_Q074",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s004"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q074-2",
+          "parent_group_id": "group_Q074",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [],
+          "stem_segment_ids": [
+            "s006"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q084",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 255,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 255,
+          "end": 257,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 257,
+          "end": 259,
+          "kind": "metadata"
+        },
+        {
+          "id": "s005",
+          "start": 259,
+          "end": 260,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 260,
+          "end": 325,
+          "kind": "stem"
+        },
+        {
+          "id": "s007",
+          "start": 325,
+          "end": 327,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 327,
+          "end": 329,
+          "kind": "metadata"
+        },
+        {
+          "id": "s009",
+          "start": 329,
+          "end": 330,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 330,
+          "end": 421,
+          "kind": "stem"
+        },
+        {
+          "id": "s011",
+          "start": 421,
+          "end": 423,
+          "kind": "layout"
+        },
+        {
+          "id": "s012",
+          "start": 423,
+          "end": 425,
+          "kind": "metadata"
+        },
+        {
+          "id": "s013",
+          "start": 425,
+          "end": 426,
+          "kind": "layout"
+        },
+        {
+          "id": "s014",
+          "start": 426,
+          "end": 520,
+          "kind": "reference"
+        },
+        {
+          "id": "s015",
+          "start": 520,
+          "end": 521,
+          "kind": "layout"
+        },
+        {
+          "id": "s016",
+          "start": 521,
+          "end": 561,
+          "kind": "stem"
+        },
+        {
+          "id": "s017",
+          "start": 561,
+          "end": 563,
+          "kind": "layout"
+        },
+        {
+          "id": "s018",
+          "start": 563,
+          "end": 565,
+          "kind": "metadata"
+        },
+        {
+          "id": "s019",
+          "start": 565,
+          "end": 566,
+          "kind": "layout"
+        },
+        {
+          "id": "s020",
+          "start": 566,
+          "end": 659,
+          "kind": "reference"
+        },
+        {
+          "id": "s021",
+          "start": 659,
+          "end": 660,
+          "kind": "layout"
+        },
+        {
+          "id": "s022",
+          "start": 660,
+          "end": 700,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q084-a",
+          "parent_group_id": "group_Q084",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s004"
+          ],
+          "stem_segment_ids": [
+            "s006"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q084-b",
+          "parent_group_id": "group_Q084",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s008"
+          ],
+          "stem_segment_ids": [
+            "s010"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q084-c",
+          "parent_group_id": "group_Q084",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s012"
+          ],
+          "stem_segment_ids": [
+            "s016"
+          ],
+          "reference_segment_ids": [
+            "s002",
+            "s014"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q084-d",
+          "parent_group_id": "group_Q084",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s018"
+          ],
+          "stem_segment_ids": [
+            "s022"
+          ],
+          "reference_segment_ids": [
+            "s002",
+            "s020"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "source_id": "Q085",
+      "status": "proposed",
+      "segments": [
+        {
+          "id": "s001",
+          "start": 0,
+          "end": 3,
+          "kind": "metadata"
+        },
+        {
+          "id": "s002",
+          "start": 3,
+          "end": 128,
+          "kind": "reference"
+        },
+        {
+          "id": "s003",
+          "start": 128,
+          "end": 130,
+          "kind": "layout"
+        },
+        {
+          "id": "s004",
+          "start": 130,
+          "end": 132,
+          "kind": "metadata"
+        },
+        {
+          "id": "s005",
+          "start": 132,
+          "end": 133,
+          "kind": "layout"
+        },
+        {
+          "id": "s006",
+          "start": 133,
+          "end": 185,
+          "kind": "stem"
+        },
+        {
+          "id": "s007",
+          "start": 185,
+          "end": 187,
+          "kind": "layout"
+        },
+        {
+          "id": "s008",
+          "start": 187,
+          "end": 189,
+          "kind": "metadata"
+        },
+        {
+          "id": "s009",
+          "start": 189,
+          "end": 190,
+          "kind": "layout"
+        },
+        {
+          "id": "s010",
+          "start": 190,
+          "end": 244,
+          "kind": "stem"
+        },
+        {
+          "id": "s011",
+          "start": 244,
+          "end": 246,
+          "kind": "layout"
+        },
+        {
+          "id": "s012",
+          "start": 246,
+          "end": 248,
+          "kind": "metadata"
+        },
+        {
+          "id": "s013",
+          "start": 248,
+          "end": 249,
+          "kind": "layout"
+        },
+        {
+          "id": "s014",
+          "start": 249,
+          "end": 317,
+          "kind": "reference"
+        },
+        {
+          "id": "s015",
+          "start": 317,
+          "end": 318,
+          "kind": "layout"
+        },
+        {
+          "id": "s016",
+          "start": 318,
+          "end": 375,
+          "kind": "stem"
+        },
+        {
+          "id": "s017",
+          "start": 375,
+          "end": 377,
+          "kind": "layout"
+        },
+        {
+          "id": "s018",
+          "start": 377,
+          "end": 379,
+          "kind": "metadata"
+        },
+        {
+          "id": "s019",
+          "start": 379,
+          "end": 380,
+          "kind": "layout"
+        },
+        {
+          "id": "s020",
+          "start": 380,
+          "end": 428,
+          "kind": "stem"
+        },
+        {
+          "id": "s021",
+          "start": 428,
+          "end": 430,
+          "kind": "layout"
+        },
+        {
+          "id": "s022",
+          "start": 430,
+          "end": 432,
+          "kind": "metadata"
+        },
+        {
+          "id": "s023",
+          "start": 432,
+          "end": 433,
+          "kind": "layout"
+        },
+        {
+          "id": "s024",
+          "start": 433,
+          "end": 523,
+          "kind": "reference"
+        },
+        {
+          "id": "s025",
+          "start": 523,
+          "end": 524,
+          "kind": "layout"
+        },
+        {
+          "id": "s026",
+          "start": 524,
+          "end": 580,
+          "kind": "stem"
+        }
+      ],
+      "items": [
+        {
+          "id": "Q085-a",
+          "parent_group_id": "group_Q085",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s004"
+          ],
+          "stem_segment_ids": [
+            "s006"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q085-b",
+          "parent_group_id": "group_Q085",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s008"
+          ],
+          "stem_segment_ids": [
+            "s010"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q085-c",
+          "parent_group_id": "group_Q085",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s012"
+          ],
+          "stem_segment_ids": [
+            "s016"
+          ],
+          "reference_segment_ids": [
+            "s002",
+            "s014"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q085-d",
+          "parent_group_id": "group_Q085",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s018"
+          ],
+          "stem_segment_ids": [
+            "s020"
+          ],
+          "reference_segment_ids": [
+            "s002"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        },
+        {
+          "id": "Q085-e",
+          "parent_group_id": "group_Q085",
+          "response_kind": "short_answer",
+          "source_label_segment_ids": [
+            "s022"
+          ],
+          "stem_segment_ids": [
+            "s026"
+          ],
+          "reference_segment_ids": [
+            "s002",
+            "s024"
+          ],
+          "option_groups": [],
+          "matching_rows": [],
+          "response_template_segment_ids": [],
+          "depends_on_item_ids": [],
+          "context_reuse": [],
+          "disposition": "proposed"
+        }
+      ],
+      "issues": []
+    }
+  ]
+}

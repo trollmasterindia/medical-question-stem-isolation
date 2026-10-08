@@ -92,6 +92,17 @@ def main():
         help="Reference placement layout in student UI (default: beside)"
     )
     parser.add_argument(
+        "--engine",
+        choices=["live", "offline"],
+        default="live",
+        help="Boundary detector engine: 'live' (production Live AI) or 'offline' (experimental autonomous parser)"
+    )
+    parser.add_argument(
+        "--offline",
+        action="store_true",
+        help="Shortcut to run with --engine offline without requiring API keys"
+    )
+    parser.add_argument(
         "--html",
         default=str(ROOT_DIR / "docs" / "index.html"),
         help="Path to save interactive HTML comparison viewer"
@@ -104,14 +115,18 @@ def main():
 
     args = parser.parse_args()
 
+    engine = "offline" if args.offline else args.engine
     inputs_dir = Path(args.inputs)
     output_json_path = Path(args.output_json)
     html_path = Path(args.html)
 
     print("=" * 80)
     print(" MEDICAL ASSESSMENT STEM ISOLATION REVIEWER")
-    print(f" Engine: Live AI Boundary Detector | Model: {args.model}")
-    print(" Architecture: Live AI Contract -> Python Verbatim Slicing")
+    if engine == "offline":
+        print(" Engine: Autonomous Semantic Parser (Offline / Experimental)")
+    else:
+        print(f" Engine: Live AI Boundary Detector | Model: {args.model}")
+    print(" Architecture: Contract Schema -> Python Verbatim Slicing")
     print("=" * 80)
 
     cfg = {
@@ -125,7 +140,9 @@ def main():
         "reference_placement": args.reference_placement
     }
 
-    detector = AIBoundaryDetector(api_key=args.api_key, model_name=args.model)
+    detector = None
+    if engine != "offline":
+        detector = AIBoundaryDetector(api_key=args.api_key, model_name=args.model)
 
     if args.file:
         file_path = Path(args.file)
@@ -135,11 +152,13 @@ def main():
         with open(file_path, "r", encoding="utf-8") as f:
             raw_text = f.read()
         qid = file_path.stem
-        contract, processed, meta = detector.detect_and_process(
+        contract, processed, meta = process_question_item(
             raw_text=raw_text,
             question_id=qid,
+            ai_detector=detector,
             domain="Clinical Nursing",
-            config=cfg
+            config=cfg,
+            engine=engine
         )
         total_items = len(processed)
         passed_items = sum(
@@ -149,7 +168,7 @@ def main():
         preservation_rate = f"{(passed_items / total_items * 100):.1f}%" if total_items > 0 else "0.0%"
         payload = {
             "title": f"Review Output: {qid}",
-            "method": f"Live AI Boundary Detection ({args.model}).",
+            "method": f"{'Offline Autonomous Parser' if engine == 'offline' else f'Live AI Boundary Detection ({args.model})'}.",
             "summary": {
                 "total_items": total_items,
                 "passed_items": passed_items,
@@ -173,7 +192,8 @@ def main():
             question_ids=args.ids,
             api_key=args.api_key,
             model_name=args.model,
-            config=cfg
+            config=cfg,
+            engine=engine
         )
 
     questions = payload["questions"]

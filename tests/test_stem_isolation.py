@@ -14,7 +14,7 @@ from experimental.autonomous_parser import AutonomousSemanticParser
 class TestStemIsolation(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        json_path = base_dir / 'data' / 'review_output.json'
+        json_path = base_dir / 'data' / 'benchmark_snapshot.json'
         if not json_path.exists():
             json_path = base_dir / 'data' / 'before_vs_after_questions.json'
         with open(json_path, 'r', encoding='utf-8') as f:
