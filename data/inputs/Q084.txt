@@ -1,0 +1,9 @@
+5. The dosing guidelines for a medication for children who are <50 kg is 0.2 to 0.5 mg/kg/dose every 3 to 4 hours as needed, and for children 50 kg and over it is 15 to 20 mg every 3 to 4 hours as needed. The medication is available in 2mg/mL and 4 mg/mL.
+
+a. What is the safe mg/dose range for a child weighing 23 kilograms?
+
+b. What is the normal mL/dose range using the 2 mg/mL solution for a child weighing 23 pounds?
+
+c. The physician ordered 2 mL/dose of the 4 mg/mL solution for a patient who weighs 17 kilograms. Is this dose within the safe guidelines?
+
+d. The physician has ordered 3.9 mL of the 4 mg/mL solution for a child who weighs 14 kilograms. Is this dose within the safe guidelines?

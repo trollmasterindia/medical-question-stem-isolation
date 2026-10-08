@@ -1,0 +1,16 @@
+Your patient turns on their call light. Upon entering your patient’s room, they say they are short of breath. Prioritize your actions from first to sixth.
+
+Institute actions to improve oxygenation
+Apply oxygen as ordered
+Reassess pulse oximetry
+Teach oxygen safety
+Assess lung sounds
+Assess pulse oximetry
+
+Priority	Actions
+First	
+Second	
+Third	
+Four	
+Fifth	
+Sixth	

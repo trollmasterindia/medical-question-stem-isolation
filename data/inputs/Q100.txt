@@ -1,0 +1,7 @@
+21. Use the following choices for Questions 21a–b.
+A. Predictive value positive.
+B. Sensitivity.
+C. Specificity.
+D. Validity.
+a. ____ Surveillance detected 23 of 30 actual cases of a disease.
+b. ____ Of 16 statistically significant aberrations (deviations from baseline) detected by syndromic surveillance, only one represented an actual outbreak of disease.

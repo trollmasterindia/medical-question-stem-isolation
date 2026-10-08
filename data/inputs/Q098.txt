@@ -1,0 +1,9 @@
+8. Investigators enrolled 100 diabetics without eye disease in a cohort (follow-up) study. The results of the first 3 years were as follows:
+Year 1: 0 cases of eye disease detected out of 92; 8 lost to follow-up
+Year 2: 2 new cases of eye disease detected out of 80; 2 had died; 10 lost to follow-up
+Year 3: 3 new cases of eye disease detected out of 63; 2 more had died; 13 more lost to follow-up
+The person-time incidence rate is calculated as:
+A. 5 ⁄ 100
+B. 5 ⁄ 63
+C. 5 ⁄ 235
+D. 5 ⁄ 250

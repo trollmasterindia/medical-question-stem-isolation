@@ -1,0 +1,5 @@
+10. A patient is receiving 1000 mL of RL. The IV is infusing at 21 gtt/min. The drop factor is 10 gtt/mL.
+
+Calculate the infusion time.
+
+If the IV was started at 0800, when would the infusion be completed?

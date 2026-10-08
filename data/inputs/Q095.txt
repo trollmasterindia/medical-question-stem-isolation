@@ -1,0 +1,13 @@
+5. Use the following steps of an outbreak investigation for Question 5:
+1. Analyze data by time, place, and person
+2. Conduct a case-control study
+3. Generate hypotheses
+4. Conduct active surveillance for additional cases
+5. Verify the diagnosis
+6. Confirm that the number of cases exceeds the expected number
+7. Talk with laboratorians about specimen collection
+For an investigation of an outbreak, what is the logical conceptual order of the steps listed above?
+A. 1-2-3-4-5-6-7
+B. 5-6-4-1-2-3-7
+C. 6-5-3-1-2-7-4
+D. 6-5-7-4-1-3-2

@@ -1,0 +1,963 @@
+"""
+html_generator.py
+
+Generates a standalone, interactive HTML comparison viewer for medical assessment stem isolation.
+Features:
+- Instant search by Question ID or keyword (no batches needed!)
+- Category filters: All, Split-Screen (Reference + Stem), Single-Page (Stem Only), Subquestions
+- Before vs After layout comparison toggle
+- Per-question JSON inspection modal with 1-click clipboard copy
+- Complete JSON export download
+"""
+
+import json
+from pathlib import Path
+from typing import Dict, Any
+
+
+def generate_html_viewer(payload: Dict[str, Any], output_path: Path):
+    """
+    Renders the interactive Before vs After HTML comparison viewer.
+    """
+    json_str = json.dumps(payload, ensure_ascii=False)
+    
+    html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Assessment Stem Isolation - Before vs After Reviewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {{
+      --bg-dark: #0b0f19;
+      --bg-surface: #111827;
+      --bg-card: #1f2937;
+      --border-subtle: #374151;
+      --text-light: #f9fafb;
+      --text-muted: #9ca3af;
+      --primary: #38bdf8;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-indigo: #818cf8;
+      --accent-rose: #f43f5e;
+      --exam-paper: #ffffff;
+      --exam-ink: #1e293b;
+      --exam-border: #cbd5e1;
+      --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }}
+
+    * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+
+    body {{
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--font-ui);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }}
+
+    header.top-nav {{
+      background: #0f172a;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }}
+
+    .brand-wrap {{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }}
+
+    .brand-badge {{
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: var(--font-code);
+    }}
+
+    .brand-title {{
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }}
+
+    .brand-sub {{
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }}
+
+    .header-actions {{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }}
+
+    .btn-action {{
+      background: #1f2937;
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }}
+
+    .btn-action:hover {{
+      background: #2563eb;
+      border-color: #3b82f6;
+    }}
+
+    .main-workspace {{
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 58px);
+      overflow: hidden;
+    }}
+
+    aside.sidebar {{
+      width: 320px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }}
+
+    .sidebar-header {{
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }}
+
+    .filter-tags {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }}
+
+    .filter-tag-btn {{
+      background: #1f2937;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }}
+
+    .filter-tag-btn:hover {{
+      color: #fff;
+      border-color: #4b5563;
+    }}
+
+    .filter-tag-btn.active {{
+      background: #2563eb;
+      color: #fff;
+      border-color: #3b82f6;
+    }}
+
+    .search-box {{
+      width: 100%;
+      background: #1f2937;
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      outline: none;
+    }}
+
+    .search-box:focus {{
+      border-color: var(--primary);
+    }}
+
+    .q-list {{
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }}
+
+    .q-item {{
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }}
+
+    .q-item:hover {{
+      background: #2d3748;
+      border-color: #60a5fa;
+    }}
+
+    .q-item.active {{
+      background: #1e3a8a;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 1px #3b82f6;
+    }}
+
+    .q-item-id {{
+      font-family: var(--font-code);
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+    }}
+
+    .q-item-meta {{
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-top: 2px;
+    }}
+
+    .layout-badge {{
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      font-family: var(--font-code);
+    }}
+
+    .badge-split {{ background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }}
+    .badge-single {{ background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }}
+    .badge-sub {{ background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }}
+
+    .q-item-stem-len {{
+      font-size: 11px;
+      font-family: var(--font-code);
+      font-weight: 600;
+      color: var(--accent-green);
+    }}
+
+    main.viewport {{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: #0b0f19;
+      padding: 20px 24px;
+      gap: 16px;
+    }}
+
+    .q-details-bar {{
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }}
+
+    .q-title-wrap {{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }}
+
+    .q-id-pill {{
+      font-family: var(--font-code);
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      background: #1f2937;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+    }}
+
+    .domain-tag {{
+      font-size: 12px;
+      color: var(--text-muted);
+    }}
+
+    .verification-pill {{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }}
+
+    .toggle-group {{
+      display: flex;
+      background: #0f172a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 3px;
+    }}
+
+    .toggle-btn {{
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }}
+
+    .toggle-btn.active {{
+      background: #2563eb;
+      color: #fff;
+    }}
+
+    .render-canvas {{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }}
+
+    .exam-frame {{
+      background: var(--exam-paper);
+      color: var(--exam-ink);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      border: 1px solid var(--exam-border);
+      display: flex;
+      flex-direction: column;
+      min-height: 480px;
+    }}
+
+    .exam-header {{
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--exam-border);
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+    }}
+
+    .exam-split-body {{
+      display: flex;
+      flex: 1;
+      min-height: 440px;
+    }}
+
+    .exam-ref-pane {{
+      width: 48%;
+      background: #f8fafc;
+      border-right: 1px solid var(--exam-border);
+      padding: 20px;
+      overflow-y: auto;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #334155;
+    }}
+
+    .exam-ref-pane h4 {{
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }}
+
+    .exam-stem-pane {{
+      flex: 1;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow-y: auto;
+    }}
+
+    .exam-stem-text {{
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.55;
+      color: #0f172a;
+    }}
+
+    .stem-badge-tag {{
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-code);
+      margin-left: 8px;
+    }}
+
+    .stem-under-badge {{
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }}
+
+    .stem-over-badge {{
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }}
+
+    .options-list {{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }}
+
+    .option-row {{
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: #1e293b;
+      line-height: 1.45;
+      transition: all 0.15s;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }}
+
+    .option-row:hover {{
+      border-color: #3b82f6;
+      background: #f8fafc;
+    }}
+
+    .before-view-pane {{
+      padding: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #1e293b;
+    }}
+
+    .before-banner {{
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }}
+
+    /* JSON Modal */
+    .modal-overlay {{
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }}
+
+    .modal-overlay.active {{
+      display: flex;
+    }}
+
+    .modal-card {{
+      background: #0f172a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }}
+
+    .modal-header {{
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111827;
+    }}
+
+    .modal-title {{
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }}
+
+    .modal-close {{
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }}
+
+    .modal-body {{
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+    }}
+
+    .json-code {{
+      font-family: var(--font-code);
+      font-size: 12px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }}
+
+    .modal-footer {{
+      padding: 12px 20px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #111827;
+    }}
+
+    .copy-toast {{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 200;
+    }}
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="top-nav">
+    <div class="brand-wrap">
+      <span class="brand-badge">AGY MEDICAL</span>
+      <div>
+        <div class="brand-title">Stem Isolation & Question Layout Reviewer</div>
+        <div class="brand-sub">Admin Constraint: Stem &le; 500 chars | 100% Exact Text Preservation Verified</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-action" onclick="toggleAllView('before')">All Before</button>
+      <button class="btn-action" onclick="toggleAllView('after')">All After</button>
+      <button class="btn-action" onclick="downloadJSON()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Download JSON
+      </button>
+    </div>
+  </header>
+
+  <!-- Workspace -->
+  <div class="main-workspace">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search ID or question text..." oninput="handleSearch()">
+        <div class="filter-tags">
+          <button class="filter-tag-btn active" data-filter="all" onclick="setFilter('all')">All (<span id="count-all">0</span>)</button>
+          <button class="filter-tag-btn" data-filter="split" onclick="setFilter('split')">Split-Screen (<span id="count-split">0</span>)</button>
+          <button class="filter-tag-btn" data-filter="single" onclick="setFilter('single')">Single-Page (<span id="count-single">0</span>)</button>
+          <button class="filter-tag-btn" data-filter="sub" onclick="setFilter('sub')">Subquestions (<span id="count-sub">0</span>)</button>
+        </div>
+      </div>
+      <div class="q-list" id="questionList">
+        <!-- Rendered by JS -->
+      </div>
+    </aside>
+
+    <!-- Main Viewport -->
+    <main class="viewport" id="viewport">
+      <div class="q-details-bar">
+        <div class="q-title-wrap">
+          <span class="q-id-pill" id="currentQId">Q001</span>
+          <span class="domain-tag" id="currentDomain">Clinical Nursing</span>
+          <span class="verification-pill" id="currentVerif">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            0 Added, 0 Removed (Exact Match)
+          </span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="toggle-group">
+            <button class="toggle-btn" id="btnBefore" onclick="setCurrentView('before')">Before Layout</button>
+            <button class="toggle-btn active" id="btnAfter" onclick="setCurrentView('after')">After Layout</button>
+          </div>
+          <button class="btn-action" onclick="openJSONModal()">
+            <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            View JSON
+          </button>
+        </div>
+      </div>
+
+      <div class="render-canvas" id="renderCanvas">
+        <!-- Exam Canvas Rendered by JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- JSON Modal -->
+  <div class="modal-overlay" id="jsonModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>Question JSON Export:</span>
+          <span id="modalQId" style="font-family:var(--font-code); color:var(--primary);"></span>
+        </div>
+        <button class="modal-close" onclick="closeJSONModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre class="json-code" id="modalCode"></pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action" onclick="copyModalJSON()">Copy JSON</button>
+        <button class="btn-action" onclick="closeJSONModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="copy-toast" id="copyToast">JSON copied to clipboard!</div>
+
+  <script>
+    const DATA = {json_str};
+    let currentQ = DATA.questions[0];
+    let currentViewMode = 'after'; // 'before' | 'after'
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function init() {{
+      updateCounts();
+      renderSidebar();
+      selectQuestion(DATA.questions[0].id);
+    }}
+
+    function updateCounts() {{
+      document.getElementById('count-all').textContent = DATA.questions.length;
+      document.getElementById('count-split').textContent = DATA.questions.filter(q => q.after.layout === 'split_screen_with_reference').length;
+      document.getElementById('count-single').textContent = DATA.questions.filter(q => q.after.layout === 'single_column_stem_only').length;
+      document.getElementById('count-sub').textContent = DATA.questions.filter(q => q.id.includes('-')).length;
+    }}
+
+    function setFilter(filter) {{
+      currentFilter = filter;
+      document.querySelectorAll('.filter-tag-btn').forEach(btn => {{
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      }});
+      renderSidebar();
+    }}
+
+    function handleSearch() {{
+      searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+      renderSidebar();
+    }}
+
+    function getFilteredQuestions() {{
+      return DATA.questions.filter(q => {{
+        // Filter tag check
+        if (currentFilter === 'split' && q.after.layout !== 'split_screen_with_reference') return false;
+        if (currentFilter === 'single' && q.after.layout !== 'single_column_stem_only') return false;
+        if (currentFilter === 'sub' && !q.id.includes('-')) return false;
+
+        // Search check
+        if (searchQuery) {{
+          const qText = (q.before.stem + ' ' + (q.after.stem || '') + ' ' + (q.after.reference || '')).toLowerCase();
+          return q.id.toLowerCase().includes(searchQuery) || qText.includes(searchQuery);
+        }}
+        return true;
+      }});
+    }}
+
+    function renderSidebar() {{
+      const listEl = document.getElementById('questionList');
+      listEl.innerHTML = '';
+      const filtered = getFilteredQuestions();
+
+      filtered.forEach(q => {{
+        const item = document.createElement('div');
+        item.className = 'q-item' + (currentQ && currentQ.id === q.id ? ' active' : '');
+        item.onclick = () => selectQuestion(q.id);
+
+        const isSplit = q.after.layout === 'split_screen_with_reference';
+        const isSub = q.id.includes('-');
+        
+        let badgeHtml = '';
+        if (isSub) {{
+          badgeHtml = '<span class="layout-badge badge-sub">SUB</span>';
+        }} else if (isSplit) {{
+          badgeHtml = '<span class="layout-badge badge-split">SPLIT</span>';
+        }} else {{
+          badgeHtml = '<span class="layout-badge badge-single">SINGLE</span>';
+        }}
+
+        item.innerHTML = `
+          <div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span class="q-item-id">${{q.id}}</span>
+              ${{badgeHtml}}
+            </div>
+            <div class="q-item-meta">
+              <span>${{q.domain || 'Clinical'}}</span>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div class="q-item-stem-len">${{q.after.stem_char_count}}c</div>
+            <div style="font-size:9.5px; color:var(--text-muted);">${{isSplit ? q.after.reference_char_count + 'c ref' : 'no ref'}}</div>
+          </div>
+        `;
+        listEl.appendChild(item);
+      }});
+    }}
+
+    function selectQuestion(qid) {{
+      currentQ = DATA.questions.find(q => q.id === qid);
+      if (!currentQ) return;
+
+      document.querySelectorAll('.q-item').forEach(el => {{
+        el.classList.toggle('active', el.querySelector('.q-item-id').textContent === qid);
+      }});
+
+      document.getElementById('currentQId').textContent = currentQ.id;
+      document.getElementById('currentDomain').textContent = currentQ.domain || 'Clinical Nursing';
+
+      const v = currentQ.verification;
+      const verifEl = document.getElementById('currentVerif');
+      if (v.exact_match && v.stem_under_500) {{
+        verifEl.style.color = '#10b981';
+        verifEl.style.background = 'rgba(16, 185, 129, 0.12)';
+        verifEl.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Exact Match: 0 Added, 0 Removed (&le; 500c)`;
+      }} else {{
+        verifEl.style.color = '#f43f5e';
+        verifEl.style.background = 'rgba(244, 63, 94, 0.12)';
+        verifEl.innerHTML = `Mismatch / Over limit`;
+      }}
+
+      renderView();
+    }}
+
+    function setCurrentView(mode) {{
+      currentViewMode = mode;
+      document.getElementById('btnBefore').classList.toggle('active', mode === 'before');
+      document.getElementById('btnAfter').classList.toggle('active', mode === 'after');
+      renderView();
+    }}
+
+    function toggleAllView(mode) {{
+      setCurrentView(mode);
+    }}
+
+    function renderView() {{
+      const canvas = document.getElementById('renderCanvas');
+      if (!currentQ) return;
+
+      if (currentViewMode === 'before') {{
+        renderBeforeView(canvas);
+      }} else {{
+        renderAfterView(canvas);
+      }}
+    }}
+
+    function renderBeforeView(container) {{
+      const raw = currentQ.before.stem;
+      const len = currentQ.before.char_count;
+      const fits = currentQ.before.fits_500_char_limit;
+
+      container.innerHTML = `
+        <div class="exam-frame">
+          <div class="exam-header">
+            <span>BEFORE: Raw Input String Layout (Single Block)</span>
+            <span>Total Length: <strong>${{len}} characters</strong> ${{fits ? '<span class="stem-badge-tag stem-under-badge">&le; 500c</span>' : '<span class="stem-badge-tag stem-over-badge">EXCEEDS 500c LIMIT</span>'}}</span>
+          </div>
+          <div class="before-view-pane">
+            <div class="before-banner">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <span>Unparsed Item: Clinical case, prompt, and distractors were lumped together into a single block.</span>
+            </div>
+            <pre style="font-family:var(--font-ui); font-size:14.5px; line-height:1.7; white-space:pre-wrap; color:#1e293b;">${{escapeHtml(raw)}}</pre>
+          </div>
+        </div>
+      `;
+    }}
+
+    function renderAfterView(container) {{
+      const q = currentQ.after;
+      const hasRef = !!q.reference;
+
+      let optionsHtml = '';
+      if (q.distractors && q.distractors.length > 0) {{
+        optionsHtml = '<div class="options-list">';
+        q.distractors.forEach(opt => {{
+          const lines = opt.split('\\n');
+          lines.forEach(l => {{
+            if (l.trim()) {{
+              optionsHtml += `<div class="option-row"><span>${{escapeHtml(l)}}</span></div>`;
+            }}
+          }});
+        }});
+        optionsHtml += '</div>';
+      }}
+
+      if (hasRef) {{
+        // Split screen layout
+        container.innerHTML = `
+          <div class="exam-frame">
+            <div class="exam-header">
+              <span>AFTER: Split-Screen View (Reference Panel Left | Stem & Options Right)</span>
+              <span>Layout: <strong>split_screen_with_reference</strong></span>
+            </div>
+            <div class="exam-split-body">
+              <div class="exam-ref-pane">
+                <h4>
+                  <span>CLINICAL REFERENCE / SCENARIO</span>
+                  <span style="font-family:var(--font-code); font-size:11px;">${{q.reference_char_count}} chars</span>
+                </h4>
+                <div style="white-space:pre-wrap; font-size:13.5px; line-height:1.65; color:#334155;">${{escapeHtml(q.reference)}}</div>
+              </div>
+              <div class="exam-stem-pane">
+                <div>
+                  <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:#64748b; margin-bottom:6px;">
+                    QUESTION STEM
+                    <span class="stem-badge-tag stem-under-badge">${{q.stem_char_count}} / 500 chars (&le; 500 limit)</span>
+                  </div>
+                  <div class="exam-stem-text" style="white-space:pre-wrap;">${{escapeHtml(q.stem)}}</div>
+                </div>
+                <div>
+                  <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:#64748b; margin-bottom:6px;">ANSWER CHOICES</div>
+                  ${{optionsHtml}}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }} else {{
+        // Single column layout (e.g. Q063)
+        container.innerHTML = `
+          <div class="exam-frame">
+            <div class="exam-header">
+              <span>AFTER: Single-Column View (No Exhibit -> Instruction Kept in Stem)</span>
+              <span>Layout: <strong>single_column_stem_only</strong></span>
+            </div>
+            <div class="before-view-pane" style="max-width:850px; margin:0 auto; width:100%;">
+              <div style="margin-bottom:20px;">
+                <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:#64748b; margin-bottom:6px;">
+                  QUESTION STEM
+                  <span class="stem-badge-tag stem-under-badge">${{q.stem_char_count}} / 500 chars (&le; 500 limit)</span>
+                </div>
+                <div class="exam-stem-text" style="font-size:16px; white-space:pre-wrap;">${{escapeHtml(q.stem)}}</div>
+              </div>
+              <div>
+                <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:#64748b; margin-bottom:8px;">ANSWER CHOICES</div>
+                ${{optionsHtml}}
+              </div>
+            </div>
+          </div>
+        `;
+      }}
+    }}
+
+    function openJSONModal() {{
+      if (!currentQ) return;
+      document.getElementById('modalQId').textContent = currentQ.id;
+      document.getElementById('modalCode').textContent = JSON.stringify(currentQ, null, 2);
+      document.getElementById('jsonModal').classList.add('active');
+    }}
+
+    function closeJSONModal() {{
+      document.getElementById('jsonModal').classList.remove('active');
+    }}
+
+    function copyModalJSON() {{
+      const text = document.getElementById('modalCode').textContent;
+      navigator.clipboard.writeText(text).then(() => {{
+        const toast = document.getElementById('copyToast');
+        toast.style.display = 'block';
+        setTimeout(() => {{ toast.style.display = 'none'; }}, 2000);
+      }});
+    }}
+
+    function downloadJSON() {{
+      const blob = new Blob([JSON.stringify(DATA, null, 2)], {{ type: 'application/json' }});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'review_output.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }}
+
+    function escapeHtml(str) {{
+      if (!str) return '';
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }}
+
+    window.onload = init;
+  </script>
+</body>
+</html>
+"""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    print(f"Generated comparison viewer at {output_path}")

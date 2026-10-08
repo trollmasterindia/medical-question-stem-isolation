@@ -1,0 +1,5 @@
+Exercise 2.3
+
+Using the same vaccination data as in Exercise 2.2, find the mode. (If you answered Exercise 2.2, find the mode from your frequency distribution.)
+
+2, 0, 3, 1, 0, 1, 2, 2, 4, 8, 1, 3, 3, 12, 1, 6, 2, 5, 1

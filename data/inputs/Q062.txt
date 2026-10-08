@@ -1,0 +1,6 @@
+24. Given the area under a normal curve, which two of the following ranges are the same? (Circle the TWO that are the same.)
+A. From the 2.5th percentile to the 97.5th percentile
+B. From the 5th percentile to the 95th percentile
+C. From the 25th percentile to the 75th percentile
+D. From 1 standard deviation below the mean to 1 standard deviation above the mean
+E. From 1.96 standard deviations below the mean to 1.96 standard deviations above the mean
